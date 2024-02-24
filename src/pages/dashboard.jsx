@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const users = [
@@ -113,6 +114,7 @@ function DashboardPage() {
       );
     }
   }
+  const navigate = useNavigate();
   return (
     <>
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -225,6 +227,7 @@ function DashboardPage() {
                       </th>
 
                       <th scope="col" className="px-6 py-3 text-end"></th>
+                      <th scope="col" className="px-6 py-3 text-end"></th>
                     </tr>
                   </thead>
 
@@ -301,7 +304,19 @@ function DashboardPage() {
                               href="#"
                               onClick={() => approve(rider.uid)}
                             >
-                              See More
+                              Approve
+                            </a>
+                          </div>
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
+                            <a
+                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                              href="#"
+                              onClick={() => navigate("/riderDetails")}
+                              // Navagate to the Riders details page
+                            >
+                              See Details
                             </a>
                           </div>
                         </td>
