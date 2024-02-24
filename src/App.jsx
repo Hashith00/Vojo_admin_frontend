@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import DashboardPage from "./pages/dashboard";
 import LandingPage from "./pages/landing";
 import RealDashboard from "./pages/Realdash";
+import RiderDetails from "./pages/riderDetails";
 
 function App() {
   return (
@@ -12,7 +13,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/dashboard" element={<RealDashboard />}></Route>
+
         <Route path="/dashboard_2" element={<DashboardPage/>}></Route>
+
+
+        <Route path="/riderDetails" element={<RiderDetails />}></Route>
 
       </Routes>
     </>
