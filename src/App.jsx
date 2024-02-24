@@ -13,10 +13,16 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/dashboard" element={<RealDashboard />}></Route>
+
+        <Route path="/dashboard_2" element={<DashboardPage/>}></Route>
+
+
         <Route path="/riderDetails" element={<RiderDetails />}></Route>
+
       </Routes>
     </>
   );
 }
 
 export default App;
+//testing Comment for git hub
