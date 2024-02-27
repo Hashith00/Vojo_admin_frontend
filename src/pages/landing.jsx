@@ -16,8 +16,9 @@ function LandingPage() {
       })
       .then((response) => {
         console.log(response.data.message);
-        if (response.data.message === "Access Granted") {
+        if (response.data.code == 200) {
           navigate("/dashboard");
+          console.log(response.data.message);
         } else {
           console.log(response.data.message);
           alert(response.data.message);
@@ -92,7 +93,7 @@ function LandingPage() {
             </div>
 
             <div>
-              <form>
+              <div>
                 <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
                   <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-white">
                     <div className="text-center">
@@ -185,7 +186,7 @@ function LandingPage() {
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 
