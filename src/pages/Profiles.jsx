@@ -1,8 +1,10 @@
 import React from "react";
+import RealDashboard from "./Realdash";
 
 function Profiles() {
   return(
     <>
+    
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
   <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
