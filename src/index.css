@@ -609,11 +609,9 @@ video {
   z-index: 60;
 }
 
-
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
-
 
 .col-span-full {
   grid-column: 1 / -1;
@@ -835,16 +833,13 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-
 .grid-flow-row-dense {
   grid-auto-flow: row dense;
 }
 
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));

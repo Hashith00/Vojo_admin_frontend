@@ -1,13 +1,13 @@
 import React from "react";
-import DashboardPage from "./dashboard";
 import Statistics from "../components/stat";
-import SignInAccount from "../components/Sign_In_Account";
-import Profiles from "./Profiles";
+import RiderListPage from "./riderListPage";
+import HotelListPage from "./hotelListPage";
+
 
 function RealDashboard() {
   return (
     <>
-      <body class="dark:bg-gray-50 ">
+      <div class="dark:bg-gray-50 ">
         <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
           <div class="flex items-center py-4">
             <button
@@ -279,7 +279,7 @@ function RealDashboard() {
             <div >
             <a
                   class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  href="#"
+                  href="/"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
 	<path fill="currentColor" d="M4 12a1 1 0 0 0 1 1h7.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76a1 1 0 0 0-.21-.33l-4-4a1 1 0 1 0-1.42 1.42l2.3 2.29H5a1 1 0 0 0-1 1M17 2H7a3 3 0 0 0-3 3v3a1 1 0 0 0 2 0V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a1 1 0 0 0-2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3" />
@@ -292,11 +292,13 @@ function RealDashboard() {
         </div>
 
         <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-  
-          <Profiles/>
+        <Statistics/>
+        <RiderListPage/>
+        <HotelListPage/>
+          
           
         </div>
-      </body>
+      </div>
     </>
   );
 }

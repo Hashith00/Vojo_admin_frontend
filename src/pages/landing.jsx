@@ -38,7 +38,7 @@ function LandingPage() {
 
               <div className="mt-4 md:mb-12 max-w-2xl">
                 <h1 className="mb-4 font-semibold text-gray-800 text-4xl lg:text-5xl dark:text-gray-800">
-                  Fully customizable rules to match your unique needs
+                  Approve or delete users and service providers,See statistics
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   We provide you with a test account that can be set up in
@@ -84,9 +84,9 @@ function LandingPage() {
                         Josh Grazioso
                       </div>
                       <div className="text-xs text-gray-500">
-                        Director Payments & Risk | Airbnb
-                      </div>
+                        Director | Vojo
                     </div>
+                  </div>
                   </div>
                 </footer>
               </blockquote>

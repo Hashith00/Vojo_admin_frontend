@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const users = [
@@ -15,7 +14,7 @@ const users = [
   },
 ];
 
-function DashboardPage() {
+function HotelListPage() {
   // This updatename is purely for call the useEffect when status of the rider is updated
   const [updatedName, setUpdatedName] = useState("");
 
@@ -114,7 +113,6 @@ function DashboardPage() {
       );
     }
   }
-  const navigate = useNavigate();
   return (
     <>
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -125,7 +123,7 @@ function DashboardPage() {
                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-400">
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-800">
-                      Riders
+                      Hotels
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       Add users, edit and more.
@@ -189,7 +187,7 @@ function DashboardPage() {
                       >
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Name
+                            Hotel Name
                           </span>
                         </div>
                       </th>
@@ -197,7 +195,7 @@ function DashboardPage() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Position
+                            Hotel Reg.No
                           </span>
                         </div>
                       </th>
@@ -213,20 +211,11 @@ function DashboardPage() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Driving Licence
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
                             Created Date & Time
                           </span>
                         </div>
                       </th>
 
-                      <th scope="col" className="px-6 py-3 text-end"></th>
                       <th scope="col" className="px-6 py-3 text-end"></th>
                     </tr>
                   </thead>
@@ -304,19 +293,7 @@ function DashboardPage() {
                               href="#"
                               onClick={() => approve(rider.uid)}
                             >
-                              Approve
-                            </a>
-                          </div>
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
-                          <div className="px-6 py-1.5">
-                            <a
-                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                              href="#"
-                              onClick={() => navigate("/riderDetails")}
-                              // Navagate to the Riders details page
-                            >
-                              See Details
+                              See More
                             </a>
                           </div>
                         </td>
@@ -331,7 +308,7 @@ function DashboardPage() {
                       <span className="font-semibold text-gray-800 dark:text-gray-800">
                         {riders.length}
                       </span>{" "}
-                      Riders
+                      Hotels
                     </p>
                   </div>
 
@@ -390,4 +367,4 @@ function DashboardPage() {
   );
 }
 
-export default DashboardPage;
+export default HotelListPage;
