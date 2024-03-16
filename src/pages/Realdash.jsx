@@ -3,7 +3,7 @@ import Statistics from "../components/stat";
 import RiderListPage from "./riderListPage";
 import HotelListPage from "./hotelListPage";
 
-
+//Dash board
 function RealDashboard() {
   return (
     <>
@@ -37,7 +37,7 @@ function RealDashboard() {
             </button>
           </div>
         </div>
-
+        {/* Main topic */}
         <div
           id="application-sidebar"
           class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700"
@@ -51,12 +51,14 @@ function RealDashboard() {
               Vojo
             </a>
           </div>
-
+{/* Navbar*/}
           <nav
             class="hs-accordion-group p-6 w-full flex flex-col flex-wrap"
             data-hs-accordion-always-open
           >
             <ul class="space-y-1.5">
+              {/* List view*/}
+              {/* Home*/}
               <li>
                 <a
                   class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
@@ -80,7 +82,7 @@ function RealDashboard() {
                   Home
                 </a>
               </li>
-
+              {/* User*/}
               <li class="hs-accordion" id="users-accordion">
                 <button
                   type="button"
@@ -118,8 +120,17 @@ function RealDashboard() {
                   >
                     <path d="m18 15-6-6-6 6" />
                   </svg>
+                  
+                </button>
+              </li>
+              {/* Rider*/}
+              <li class="hs-accordion" id="riders-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                >
                   <svg
-                    class="hs-accordion-active:hidden ms-auto block w-4 h-4"
+                    class="flex-shrink-0 w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -130,11 +141,71 @@ function RealDashboard() {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <path d="m6 9 6 6 6-6" />
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
+                  Riders
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
                 </button>
               </li>
-
+              {/* Hotels*/}
+              <li class="hs-accordion" id="users-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                >
+                  <svg
+                    class="flex-shrink-0 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Hotels
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+              {/* AdminAccounts*/}
               <li class="hs-accordion" id="account-accordion">
                 <button
                   type="button"
@@ -179,23 +250,10 @@ function RealDashboard() {
                   >
                     <path d="m18 15-6-6-6 6" />
                   </svg>
-                  <svg
-                    class="hs-accordion-active:hidden ms-auto block w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
+                
                 </button>
               </li>
-
+              {/* Confirmation*/}
               <li class="hs-accordion" id="projects-accordion">
                 <button
                   type="button"
@@ -217,23 +275,10 @@ function RealDashboard() {
                   >
                     <path d="m18 15-6-6-6 6" />
                   </svg>
-                  <svg
-                    class="hs-accordion-active:hidden ms-auto block w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
+                  
                 </button>
               </li>
-
+               {/*Comment and Reviews*/}
               <li>
                 <a
                   class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -251,31 +296,18 @@ function RealDashboard() {
                   Comments and Reviews
                 </a>
               </li>
+               {/* Settings*/}
               <li>
                 <a
                   class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   href="#"
                 >
-                  <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="1em" 
-                  height="1em" 
-                  viewBox="0 0 24 24">
-	               <g 
-         fill="none" 
-  stroke="currentColor" 
-  stroke-linecap="round" 
-  stroke-linejoin="round" 
-  stroke-width="2">
-		<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065" />
-		<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0-6 0" />
-	</g>
-</svg>
+             
                   Settings
                 </a>
               </li>
             </ul>
-
+            {/* Sign Out*/}
             <div >
             <a
                   class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -292,9 +324,9 @@ function RealDashboard() {
         </div>
 
         <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+
         <Statistics/>
-        <RiderListPage/>
-        <HotelListPage/>
+        
           
           
         </div>
