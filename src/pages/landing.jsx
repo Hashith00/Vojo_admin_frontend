@@ -10,13 +10,13 @@ function LandingPage() {
 
   function handleSubmit() {
     axios
-      .post("http://localhost:4000/api/auth", {
+      .post("http://localhost:1000/api/auth", {
         email: email,
         password: password,
       })
       .then((response) => {
         console.log(response.data.message);
-        if (response.data.code == 200) {
+        if (response.data.message == "Access Granted") {
           navigate("/dashboard");
           console.log(response.data.message);
         } else {
