@@ -45,7 +45,7 @@ function HotelListPage() {
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/riders");
+        const responce = await axios.get("http://localhost:1000/api/riders");
         setRiders(responce.data);
       } catch (e) {
         console.log(e);
