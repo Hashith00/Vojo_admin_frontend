@@ -38,12 +38,10 @@ function LandingPage() {
 
               <div className="mt-4 md:mb-12 max-w-2xl">
                 <h1 className="mb-4 font-semibold text-gray-800 text-4xl lg:text-5xl dark:text-gray-800">
-                  Approve or delete users and service providers,See statistics
+                    See overall summary.Approve or delete users and service providers
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                  We provide you with a test account that can be set up in
-                  seconds. Our main focus is getting responses to you as soon as
-                  we can.
+                <p className="text-red-600 dark:text-gray-400">
+                  Admin 
                 </p>
               </div>
 
