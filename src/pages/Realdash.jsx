@@ -1,7 +1,7 @@
 import React from "react";
 import Statistics from "../components/stat";
-import RiderListPage from "./riderListPage";
-import HotelListPage from "./hotelListPage";
+import RiderListTable from "./riderListTable";
+import HotelListTable from "./hotelListTable";
 
 //Dash board
 function RealDashboard() {

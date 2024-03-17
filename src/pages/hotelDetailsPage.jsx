@@ -4,7 +4,9 @@ import React from 'react'
 
 function hotelDetailsPage() {
   return (
-    <div>hotelDetailsPage</div>
+    <div>
+      
+    </div>
   )
 }
 

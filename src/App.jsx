@@ -10,6 +10,7 @@ import HotelListPage from "./pages/hotelListPage";
 import Stats from "./components/stat";
 import SignInAccount from "./components/Sign_In_Account";
 
+
 function App() {
   return (
     <>
@@ -22,6 +23,8 @@ function App() {
         <Route path="/hotelList" element={<HotelListPage/>}></Route>
         <Route path="/stats" element={<Stats/>}></Route>
         <Route path="/signinaccounts" element={<SignInAccount/>}></Route>
+       
+        
         
 
       </Routes>
