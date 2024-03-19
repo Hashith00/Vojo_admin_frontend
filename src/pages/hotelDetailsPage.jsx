@@ -2,7 +2,7 @@ import React from "react";
 
 import React from 'react'
 
-function hotelDetailsPage() {
+function HotelDetailsPage() {
   return (
     <div>
       
@@ -10,4 +10,4 @@ function hotelDetailsPage() {
   )
 }
 
-export default hotelDetailsPage
+export default HotelDetailsPage

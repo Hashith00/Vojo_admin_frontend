@@ -1,12 +1,11 @@
-import React from "react";
-import RealDashboard from "./Realdash";
+import React from 'react'
+import RiderPayments from '../components/riderPayments'
 
-function Profiles() {
-  return(
-    <>
-    <div>
-    <div class="dark:bg-gray-50 ">
-    <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
+function PaymentsPage() {
+  return (
+   <>
+   <div class="dark:bg-gray-50 ">
+   <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
           <div class="flex items-center py-4">
             <button
               type="button"
@@ -57,13 +56,12 @@ function Profiles() {
             <ul class="space-y-1.5">
               {/* List view*/}
               {/* Home*/}
-              
               <li class="hs-accordion" id="users-accordion">
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 >
-                 <svg
+                  <svg
                     class="flex-shrink-0 w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -138,7 +136,8 @@ function Profiles() {
                 </button>
               </li>
               {/* Rider*/}
-              <li class="hs-accordion" id="riders-accordion">
+              
+                <li class="hs-accordion" id="projects-accordion">
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -178,8 +177,9 @@ function Profiles() {
                   
                 </button>
               </li>
+              
               {/* Hotels*/}
-              <li class="hs-accordion" id="account-accordion">
+              <li class="hs-accordion" id="users-accordion">
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -201,7 +201,7 @@ function Profiles() {
                     <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
-                   Hotels
+                  Hotels
                   <svg
                     class="hs-accordion-active:block ms-auto hidden w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -216,18 +216,16 @@ function Profiles() {
                   >
                     <path d="m18 15-6-6-6 6" />
                   </svg>
-                
+                  
                 </button>
               </li>
-              
-              
               {/* AdminAccounts*/}
-              <li>
-                <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
-                  href="#"
+              <li class="hs-accordion" id="account-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 >
-                   <svg
+                  <svg
                     class="flex-shrink-0 mt-0.5 w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -251,18 +249,7 @@ function Profiles() {
                     <path d="m14.3 16.6 1-.4" />
                     <path d="m20.7 13.8 1-.4" />
                   </svg>
-                  Admin Accounts
-                </a>
-              </li>
-              
-              {/* Payments*/}
-              <li class="hs-accordion" id="projects-accordion">
-                <button
-                  type="button"
-                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
-                  Confirmations
+                   Admin Accounts
                   <svg
                     class="hs-accordion-active:block ms-auto hidden w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -277,9 +264,21 @@ function Profiles() {
                   >
                     <path d="m18 15-6-6-6 6" />
                   </svg>
-                  
+                
                 </button>
               </li>
+              {/* Confirmation*/}
+              <li>
+              <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
+                  href="#"
+                >
+                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+
+                  Payments
+                </a>
+                </li>
+              
                {/*Comment and Reviews*/}
               <li>
                 <a
@@ -316,68 +315,32 @@ function Profiles() {
                   href="/"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-	<path fill="currentColor" d="M4 12a1 1 0 0 0 1 1h7.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76a1 1 0 0 0-.21-.33l-4-4a1 1 0 1 0-1.42 1.42l2.3 2.29H5a1 1 0 0 0-1 1M17 2H7a3 3 0 0 0-3 3v3a1 1 0 0 0 2 0V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a1 1 0 0 0-2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3" />
-</svg>
+	                 <path fill="currentColor" d="M4 12a1 1 0 0 0 1 1h7.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76a1 1 0 0 0-.21-.33l-4-4a1 1 0 1 0-1.42 1.42l2.3 2.29H5a1 1 0 0 0-1 1M17 2H7a3 3 0 0 0-3 3v3a1 1 0 0 0 2 0V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a1 1 0 0 0-2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3" />
+                   </svg>
                   Sign Out
                 </a>
         
             </div>
           </nav>
         </div>
-    <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-
-  <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-black">System Admins</h2>
-  </div>
- 
-
-
-  <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-    <div class="grid sm:flex sm:items-center gap-y-3 gap-x-4">
-      <a class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:none"
-              href="#"
-              aria-label="Brand">
-      <img class="rounded-lg size-20" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Image Description"/>
-      </a>
-      <div class="sm:flex sm:flex-col sm:h-full">
-        <div>
-          <h3 class="font-medium text-gray-800 dark:text-gray-900">
-            David Forren
-          </h3>
-          <p class="mt-1 text-xs uppercase text-gray-900">
-            Founder / CEO
-          </p>
-        </div>
-      
+   <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+   <div class="text-center sm:text-start flex sm:justify-end sm:items-center gap-x-3 md:gap-x-4">
+        <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/riderpayments">
+          Riders
+        </a>
+        <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/hotelpayments">
+          Hotels
+        </a><a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/userpayments">
+          Users
+        </a>
+        
       </div>
-    </div>
     
 
-    <div class="grid sm:flex sm:items-center gap-y-3 gap-x-4">
-    <a class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:none"
-              href="#"
-              aria-label="Brand">
-      <img class="rounded-lg size-20" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Image Description"/>
-       </a>
-      <div class="sm:flex sm:flex-col sm:h-full">
-        <div>
-          <h3 class="font-medium text-gray-800 dark:text-gray-900">
-            Amil Evara
-          </h3>
-          <p class="mt-1 text-xs uppercase text-gray-900">
-            User Admin
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  </div>
-</div>
-  </>
-  );
+   </div>
+   </div>
+   </>
+  )
 }
 
-export default Profiles;
+export default PaymentsPage
