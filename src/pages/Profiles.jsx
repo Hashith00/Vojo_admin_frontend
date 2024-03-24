@@ -1,7 +1,7 @@
 import React from "react";
-import RealDashboard from "./Realdash";
+import RealDashboard from "./dashBoard";
 
-function Profiles() {
+function AdminProfiles() {
   return(
     <>
     <div>
@@ -380,4 +380,4 @@ function Profiles() {
   );
 }
 
-export default Profiles;
+export default AdminProfiles;

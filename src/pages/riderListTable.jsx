@@ -32,10 +32,11 @@ function RiderListTable() {
   const approve = async (id) => {
     try {
       const responce = await axios.post(
-        "http://localhost:4000/api/update-ststus",
+        "http://localhost:1000/api/update-status",
         { id }
       );
       console.log(responce.status);
+      if(responce.status == "")
       setUpdatedName("Updated");
     } catch (e) {
       console.log(e);
@@ -46,7 +47,7 @@ function RiderListTable() {
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/riders");
+        const responce = await axios.get("http://localhost:1000/api/riders");
         setRiders(responce.data);
       } catch (e) {
         console.log(e);
@@ -58,7 +59,7 @@ function RiderListTable() {
 
   // Show status
   function returnStatus(sts) {
-    if (sts == true) {
+    if (sts === true) {
       return (
         <div className=" py-3">
           <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
@@ -76,7 +77,7 @@ function RiderListTable() {
           </span>
         </div>
       );
-    } else if (sts == null) {
+    } else if ((sts == null)||(sts ===false )) {
       return (
         <div className=" py-3">
           <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
@@ -90,7 +91,7 @@ function RiderListTable() {
             >
               <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
             </svg>
-            Approved
+            Pending
           </span>
         </div>
       );
@@ -108,7 +109,7 @@ function RiderListTable() {
             >
               <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
             </svg>
-            Pending
+            Removed
           </span>
         </div>
       );
@@ -153,12 +154,6 @@ function RiderListTable() {
                           htmlFor="hs-at-with-checkboxes-main"
                           className="flex"
                         >
-                          <input
-                            type="checkbox"
-                            className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                            id="hs-at-with-checkboxes-main"
-                          />
-                          <span className="sr-only">Checkbox</span>
                         </label>
                       </th>
 
@@ -188,6 +183,13 @@ function RiderListTable() {
                           </span>
                         </div>
                       </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            License Number
+                          </span>
+                        </div>
+                      </th>
 
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
@@ -197,6 +199,7 @@ function RiderListTable() {
                         </div>
                       </th>
 
+                      <th scope="col" className="px-6 py-3 text-end"></th>
                       <th scope="col" className="px-6 py-3 text-end"></th>
                     </tr>
                   </thead>
@@ -210,12 +213,6 @@ function RiderListTable() {
                               for="hs-at-with-checkboxes-1"
                               className="flex"
                             >
-                              <input
-                                type="checkbox"
-                                className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                id="hs-at-with-checkboxes-1"
-                              />
-                              <span className="sr-only">Checkbox</span>
                             </label>
                           </div>
                         </td>
@@ -238,7 +235,7 @@ function RiderListTable() {
                             </div>
                           </div>
                         </td>
-                        <td className="h-px w-72 whitespace-nowrap">
+                        <td className="h-px w-px whitespace-nowrap">
                           <div className="px-6 py-3">
                             <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
                               {rider.location}
@@ -274,7 +271,18 @@ function RiderListTable() {
                               href="#"
                               onClick={() => approve(rider.uid)}
                             >
-                              See More
+                              Change Status
+                            </a>
+                          </div>
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
+                            <a
+                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                              href="#"
+                              //onClick={() => approve(rider.uid)}
+                            >
+                              More Details
                             </a>
                           </div>
                         </td>
@@ -289,7 +297,7 @@ function RiderListTable() {
                       <span className="font-semibold text-gray-800 dark:text-gray-800">
                         {riders.length}
                       </span>{" "}
-                      Hotels
+                      Riders
                     </p>
                   </div>
 

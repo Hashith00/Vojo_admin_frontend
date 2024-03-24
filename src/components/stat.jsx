@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import RealDashboard from '../pages/Realdash';
+import Dashboard from '../pages/dashBoard';
 const Statistics = () => {
   //Se the count to the variables
   const [riderCount, setRiderCount] = useState(0);
@@ -11,8 +11,8 @@ const Statistics = () => {
     // Fetching the count of riders
     const fetchRiderCount = async () => {
       try {
-        const response = await axios.get('http://localhost:1000/api/rider/count');
-        const { val } = response.data; 
+        const response1 = await axios.get('http://localhost:1000/api/rider/count');
+        const { val } = response1.data; 
         setRiderCount(val);
         
       } catch (error) {
@@ -25,8 +25,8 @@ const Statistics = () => {
     // Fetching the count of hotels
     const fetchHotelCount = async () => {
       try {
-        const response = await axios.get('http://localhost:1000/api/hotel/count');
-        const { val } = response.data; 
+        const response2 = await axios.get('http://localhost:1000/api/hotel/count');
+        const { val } = response2.data; 
         setHotelCount(val);
         
       } catch (error) {
@@ -39,8 +39,8 @@ const Statistics = () => {
     // Fetching the count of users
     const fetchUsersCount = async () => {
       try {
-        const response = await axios.get('http://localhost:1000/api/user/count');
-        const { val } = response.data; // Extract the val from the response
+        const response3 = await axios.get('http://localhost:1000/api/user/count');
+        const { val } = response3.data; // Extract the val from the response
         setUsersCount(val);
         
       } catch (error) {
@@ -95,7 +95,7 @@ const Statistics = () => {
               </div>
 
               <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-gray-800">
-                <span class="font-semibold">{riderCount}</span>{" "}
+              <span class="font-semibold">{riderCount}</span>{" "}
               </h3>
             </div>
           </div>
@@ -118,7 +118,7 @@ const Statistics = () => {
               </div>
 
               <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-gray-800">
-                <span class="font-semibold">{hotelCount}</span>{" "}
+              <span class="font-semibold">{hotelCount}</span>{" "}
               </h3>
             </div>
           </div>
