@@ -67,10 +67,9 @@ function Dashboard() {
               {/* List view*/}
               {/* Home*/}
               <li>
-                <button
-                  type="button"
-                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  onClick={navigateToPage("/dashboard")}
+              <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
+                  href="http://localhost:5173/dashboard"
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -88,7 +87,7 @@ function Dashboard() {
                     <polyline points="9 22 9 12 15 12 15 22" />
                   </svg>
                   Home
-                </button>
+                </a>
               </li>
               {/* User*/}
               <li class="hs-accordion" id="users-accordion">

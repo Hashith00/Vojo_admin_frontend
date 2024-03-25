@@ -1,5 +1,6 @@
 import React from 'react'
 import HotelListTable from './hotelListTable';
+import { navigateToPage } from "../navigations/navigations";
 
 function HotelListPage() {
   return (
@@ -61,7 +62,8 @@ function HotelListPage() {
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                >
+                  onClick={navigateToPage("/dashboard")}
+                  >
                  <svg
                     class="flex-shrink-0 w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,6 +102,7 @@ function HotelListPage() {
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/userList")}   
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -141,6 +144,7 @@ function HotelListPage() {
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/riderList")}
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -181,7 +185,7 @@ function HotelListPage() {
               <li>
                 <a
                   class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
-                  href="#"
+                  href="http://localhost:5173/hotelList"
                 >
                    <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -209,6 +213,7 @@ function HotelListPage() {
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/adminProfiles")}
                 >
                   <svg
                     class="flex-shrink-0 mt-0.5 w-4 h-4"
@@ -251,16 +256,44 @@ function HotelListPage() {
                   </svg>
                 
                 </button>
+                </li>
+              {/* Journeys*/}
+              <li class="hs-accordion" id="projects-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/journeyList")}
+                  
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+                  Journeys
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
               </li>
-              
               {/* Payments*/}
               <li class="hs-accordion" id="projects-accordion">
                 <button
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/payments")}
+                  
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
-                  Confirmations
+                  Payments
                   <svg
                     class="hs-accordion-active:block ms-auto hidden w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -280,21 +313,30 @@ function HotelListPage() {
               </li>
                {/*Comment and Reviews*/}
               <li>
-                <a
-                  class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  href="#"
+              <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/comments_and_reviews")}
+                  
                 >
-                  <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="1em" 
-                  height="1em" 
-                  viewBox="0 0 24 24">
-	                  <path 
-                    fill="currentColor" 
-                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2M6 9h12v2H6zm8 5H6v-2h8zm4-6H6V6h12z" />
-                 </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
                   Comments and Reviews
-                </a>
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
               </li>
                {/* Settings*/}
               <li>

@@ -19,6 +19,7 @@ function RiderListTable() {
   // This updatename is purely for call the useEffect when status of the rider is updated
   const [updatedName, setUpdatedName] = useState("");
 
+
   // Formated the date and time
   const convertTime = (created_time) => {
     const firebaseTimestamp = created_time;
@@ -35,9 +36,11 @@ function RiderListTable() {
         "http://localhost:1000/api/update-status",
         { id }
       );
+      guestUsers();
       console.log(responce.status);
       if(responce.status == "")
       setUpdatedName("Updated");
+      
     } catch (e) {
       console.log(e);
     }
@@ -235,7 +238,7 @@ function RiderListTable() {
                             </div>
                           </div>
                         </td>
-                        <td className="h-px w-px whitespace-nowrap">
+                        <td className="h-px w-72 whitespace-nowrap">
                           <div className="px-6 py-3">
                             <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
                               {rider.location}
