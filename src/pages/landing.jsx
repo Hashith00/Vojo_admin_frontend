@@ -12,7 +12,7 @@ function LandingPage() {
     // This is for the separation dev and production envirenments
     var url;
     if (import.meta.env.VITE_ENVIRENOMNET == "developmet") {
-      url = import.meta.env.VITE_DEVELOPMENT_URL;
+      url = "http://localhost:4000";
     } else {
       url = import.meta.env.VITE_PRODUCTION_URL;
     }

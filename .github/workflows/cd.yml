@@ -14,7 +14,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t hashith/vojo_admin_front  .
+        run: docker build -t hashith/vojo_admin_front --build-arg VITE_ENVIRENOMNET='production' --build-arg VITE_PRODUCTION_URL='${{ secrets.PRODUCTION_URL }}'  .
       - name: Publish Image to docker hub
         run: docker push hashith/vojo_admin_front:latest
 
