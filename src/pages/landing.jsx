@@ -9,16 +9,24 @@ function LandingPage() {
   const navigate = useNavigate();
 
   function handleSubmit() {
+    // This is for the separation dev and production envirenments
+    var url;
+    if (import.meta.env.VITE_ENVIRENOMNET == "developmet") {
+      url = import.meta.env.VITE_DEVELOPMENT_URL;
+    } else {
+      url = import.meta.env.VITE_PRODUCTION_URL;
+    }
+
     axios
-      .post("http://3.26.150.224:4000/api/auth", {
+      .post(url + "/api/auth", {
         email: email,
         password: password,
       })
       .then((response) => {
-        console.log(response.data.message);
+        console.log(response.data.code);
         if (response.data.code == 200) {
-          navigate("/dashboard");
           console.log(response.data.message);
+          navigate("/dashboard");
         } else {
           console.log(response.data.message);
           alert(response.data.message);
@@ -85,8 +93,8 @@ function LandingPage() {
                       </div>
                       <div className="text-xs text-gray-500">
                         Director | Vojo
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </footer>
               </blockquote>
@@ -178,7 +186,7 @@ function LandingPage() {
                         <button
                           type="submit"
                           className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                          onClick={handleSubmit}
+                          onClick={() => handleSubmit()}
                         >
                           Log In
                         </button>
