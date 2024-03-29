@@ -29,4 +29,4 @@ jobs:
       - name: Delete old container
         run: sudo docker rm -f reactjs-app-container
       - name: Run Docker Container
-        run: docker run -d -p 8080:8080 hashith/vojo_admin_front:latest
+        run: sudo docker run -d -p 8080:8080 hashith/vojo_admin_front:latest
