@@ -27,6 +27,6 @@ jobs:
       - name: Pull image from docker hub
         run: sudo docker pull hashith/vojo_admin_front:latest
       - name: Delete old container
-        run: sudo docker rm -f hashith/vojo_admin_front:latest
+        run: sudo docker rm -f hashith/vojo_admin_front
       - name: Run Docker Container
         run: sudo docker run -d -p 8080:8080 hashith/vojo_admin_front:latest
