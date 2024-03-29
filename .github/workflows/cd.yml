@@ -1,0 +1,30 @@
+name: Deploy Node Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t hashith/vojo_admin_front  .
+      - name: Publish Image to docker hub
+        run: docker push hashith/vojo_admin_front:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: sudo docker pull hashith/vojo_admin_front:latest
+      - name: Delete old container
+        run: sudo docker rm -f reactjs-app-container
+      - name: Run Docker Container
+        run: docker run -d -p 8080:8080 hashith/vojo_admin_front:latest
