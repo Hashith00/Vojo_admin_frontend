@@ -10,7 +10,7 @@ function LandingPage() {
 
   function handleSubmit() {
     axios
-      .post("http://localhost:4000/api/auth", {
+      .post("http://3.26.150.224:4000/api/auth", {
         email: email,
         password: password,
       })
