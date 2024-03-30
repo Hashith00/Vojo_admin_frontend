@@ -32,7 +32,7 @@ function RiderListPage() {
   const approve = async (id) => {
     try {
       const responce = await axios.post(
-        "http://localhost:4000/api/update-ststus",
+        import.meta.env.VITE_PRODUCTION_URL + "/api/update-ststus",
         { id }
       );
       console.log(responce.status);
@@ -46,7 +46,7 @@ function RiderListPage() {
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/riders");
+        const responce = await axios.get(import.meta.env.VITE_PRODUCTION_URL + "/api/riders");
         setRiders(responce.data);
       } catch (e) {
         console.log(e);
