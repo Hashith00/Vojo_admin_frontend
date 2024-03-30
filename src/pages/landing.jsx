@@ -8,14 +8,16 @@ function LandingPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit() {
-    // This is for the separation dev and production envirenments
-    var url;
+  var url;
     if (import.meta.env.VITE_ENVIRENOMNET == "developmet") {
       url = "http://localhost:4000";
     } else {
       url = import.meta.env.VITE_PRODUCTION_URL;
     }
+
+  function handleSubmit() {
+    // This is for the separation dev and production envirenments
+    console.log(url)
 
     axios
       .post(url + "/api/auth", {
