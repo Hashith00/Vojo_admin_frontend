@@ -20,7 +20,7 @@ function LandingPage() {
     console.log(import.meta.env.VITE_PRODUCTION_URL)
 
     axios
-      .post(url + "/api/auth", {
+      .post(import.meta.env.VITE_PRODUCTION_URL + "/api/auth", {
         email: email,
         password: password,
       })
