@@ -17,7 +17,7 @@ function LandingPage() {
 
   function handleSubmit() {
     // This is for the separation dev and production envirenments
-    console.log(url)
+    console.log(import.meta.env.VITE_PRODUCTION_URL)
 
     axios
       .post(url + "/api/auth", {
