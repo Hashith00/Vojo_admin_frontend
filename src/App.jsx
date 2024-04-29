@@ -16,10 +16,11 @@ import UserPaymentsPage from "./pages/userPaymentsPage";
 import HotelDetailsPage from "./pages/hotelDetailsPage";
 import UserListPage from "./pages/userListPage";
 import CommnentPage from "./pages/comments";
-import JourneyPage from "./pages/journeys"
+import JourneyPage from "./pages/journeys";
+import ChatApp from "./pages/chat";
 function App() {
   return (
-    <>y
+    <>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
@@ -37,6 +38,7 @@ function App() {
         <Route path="/userList" element={<UserListPage/>}></Route>
         <Route path="/comments_and_reviews" element={<CommnentPage/>}></Route>
         <Route path="/journeyList" element={<JourneyPage/>}></Route>
+        <Route path="/chat" element={<ChatApp/>}></Route>
 
         
 
