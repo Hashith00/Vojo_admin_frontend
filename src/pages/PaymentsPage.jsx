@@ -1,13 +1,12 @@
 import React from 'react'
-import RiderListTable from './riderListTable'
-
+import RiderPayments from '../components/riderPayments'
 import { navigateToPage } from "../navigations/navigations";
 
-function riderListPage() {
+function PaymentsPage() {
   return (
-    <>
-    <div class="dark:bg-gray-50 ">
-        <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
+   <>
+   <div class="dark:bg-gray-50 ">
+   <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
           <div class="flex items-center py-4">
             <button
               type="button"
@@ -140,10 +139,12 @@ function riderListPage() {
                 </button>
               </li>
               {/* Rider*/}
-              <li>
-              <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
-                  href="http://localhost:5173/riderList"
+              
+                <li class="hs-accordion" id="projects-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/riderList")}
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -163,8 +164,23 @@ function riderListPage() {
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                   Riders
-                </a>
-                </li>
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
               
               {/* Hotels*/}
               <li class="hs-accordion" id="users-accordion">
@@ -256,7 +272,7 @@ function riderListPage() {
                   </svg>
                 
                 </button>
-                </li>
+              </li>
               {/* Journeys*/}
               <li class="hs-accordion" id="projects-accordion">
                 <button
@@ -285,32 +301,17 @@ function riderListPage() {
                 </button>
               </li>
               {/* Payments*/}
-              <li class="hs-accordion" id="projects-accordion">
-                <button
-                  type="button"
-                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  onClick={navigateToPage("/payments")}
-                  
+              <li>
+              <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
+                  href="http://localhost:5173/payments"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+
                   Payments
-                  <svg
-                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m18 15-6-6-6 6" />
-                  </svg>
-                  
-                </button>
-              </li>
+                </a>
+                </li>
+              
                {/*Comment and Reviews*/}
               <li>
               <button
@@ -364,13 +365,24 @@ function riderListPage() {
             </div>
           </nav>
         </div>
-           <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-              <RiderListTable/>
-           </div>
-     </div>
+   <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+   <div class="text-center sm:text-start flex sm:justify-end sm:items-center gap-x-3 md:gap-x-4">
+        <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/riderpayments">
+          Riders
+        </a>
+        <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/hotelpayments">
+          Hotels
+        </a><a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/userpayments">
+          Users
+        </a>
         
-        </>
+      </div>
+    
+
+   </div>
+   </div>
+   </>
   )
 }
 
-export default riderListPage
+export default PaymentsPage
