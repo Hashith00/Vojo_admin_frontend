@@ -11,7 +11,7 @@ const Statistics = () => {
     // Fetching the count of riders
     const fetchRiderCount = async () => {
       try {
-        const response1 = await axios.get('http://localhost:1000/api/rider/count');
+        const response1 = await axios.get('http://localhost:4000/api/rider/count');
         const { val } = response1.data; 
         setRiderCount(val);
         
@@ -25,7 +25,7 @@ const Statistics = () => {
     // Fetching the count of hotels
     const fetchHotelCount = async () => {
       try {
-        const response2 = await axios.get('http://localhost:1000/api/hotel/count');
+        const response2 = await axios.get('http://localhost:4000/api/hotel/count');
         const { val } = response2.data; 
         setHotelCount(val);
         
@@ -39,7 +39,7 @@ const Statistics = () => {
     // Fetching the count of users
     const fetchUsersCount = async () => {
       try {
-        const response3 = await axios.get('http://localhost:1000/api/user/count');
+        const response3 = await axios.get('http://localhost:4000/api/user/count');
         const { val } = response3.data; // Extract the val from the response
         setUsersCount(val);
         
