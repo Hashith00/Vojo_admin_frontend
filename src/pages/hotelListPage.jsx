@@ -1,370 +1,379 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-const users = [
-  {
-    name: "Christina Bersh",
-    email: "christina@site.com",
-    vehicle: "Car",
-    Model: "Toyota axio",
-    status: "Pending",
-    filled_details: 4,
-    created_date: "28 Dec, 12:12",
-  },
-];
+import React from 'react'
+import HotelListTable from './hotelListTable';
+import { navigateToPage } from "../navigations/navigations";
 
 function HotelListPage() {
-  // This updatename is purely for call the useEffect when status of the rider is updated
-  const [updatedName, setUpdatedName] = useState("");
-
-  // Formated the date and time
-  const convertTime = (created_time) => {
-    const firebaseTimestamp = created_time;
-    const date = new Date(
-      firebaseTimestamp._seconds * 1000 +
-        firebaseTimestamp._nanoseconds / 1000000
-    );
-    return date.toLocaleString();
-  };
-
-  const approve = async (id) => {
-    try {
-      const responce = await axios.post(
-        import.meta.env.VITE_PRODUCTION_URL  + "/api/update-ststus",
-        { id }
-      );
-      console.log(responce.status);
-      setUpdatedName("Updated");
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const [riders, setRiders] = useState([]);
-  useEffect(() => {
-    const getusers = async () => {
-      try {
-        const responce = await axios.get(import.meta.env.VITE_PRODUCTION_URL +  "/api/riders");
-        setRiders(responce.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getusers();
-    console.log(riders);
-  }, [updatedName]);
-
-  // Show status
-  function returnStatus(sts) {
-    if (sts == true) {
-      return (
-        <div className=" py-3">
-          <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-            <svg
-              className="w-2.5 h-2.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-            </svg>
-            Approved
-          </span>
-        </div>
-      );
-    } else if (sts == null) {
-      return (
-        <div className=" py-3">
-          <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-            <svg
-              className="w-2.5 h-2.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-            </svg>
-            Approved
-          </span>
-        </div>
-      );
-    } else if (sts == false) {
-      return (
-        <div class="px-6 py-3">
-          <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-500/10 dark:text-yellow-500">
-            <svg
-              class="w-2.5 h-2.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-            </svg>
-            Pending
-          </span>
-        </div>
-      );
-    }
-  }
   return (
     <>
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="flex flex-col">
-          <div className="-m-1.5 overflow-x-auto">
-            <div className="p-1.5 min-w-full inline-block align-middle">
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-100">
-                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-400">
-                  <div>
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-800">
-                      Hotels
-                    </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Add users, edit and more.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="inline-flex gap-x-2">
-                      <a
-                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-100 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-200 dark:border-gray-200 dark:text-gray-700 dark:hover:bg-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#"
-                      >
-                        View all
-                      </a>
-
-                      <a
-                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#"
-                      >
-                        <svg
-                          className="flex-shrink-0 w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                        >
-                          <path
-                            d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                        Add user
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-100">
-                  <thead className="bg-gray-50 dark:bg-slate-300">
-                    <tr>
-                      <th scope="col" className="ps-6 py-3 text-start">
-                        <label
-                          htmlFor="hs-at-with-checkboxes-main"
-                          className="flex"
-                        >
-                          <input
-                            type="checkbox"
-                            className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                            id="hs-at-with-checkboxes-main"
-                          />
-                          <span className="sr-only">Checkbox</span>
-                        </label>
-                      </th>
-
-                      <th
-                        scope="col"
-                        className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start"
-                      >
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Hotel Name
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Hotel Reg.No
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Status
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Created Date & Time
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" className="px-6 py-3 text-end"></th>
-                    </tr>
-                  </thead>
-
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {riders.map((rider) => (
-                      <tr>
-                        <td className="h-px w-px whitespace-nowrap">
-                          <div className="ps-6 py-3">
-                            <label
-                              for="hs-at-with-checkboxes-1"
-                              className="flex"
-                            >
-                              <input
-                                type="checkbox"
-                                className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                id="hs-at-with-checkboxes-1"
-                              />
-                              <span className="sr-only">Checkbox</span>
-                            </label>
-                          </div>
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
-                          <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                            <div className="flex items-center gap-x-3">
-                              <span class="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-300 dark:bg-gray-700">
-                                <span class="font-medium text-gray-800 leading-none dark:text-gray-200">
-                                  {rider.display_name.charAt(0)}
-                                </span>
-                              </span>
-                              <div className="grow">
-                                <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                                  {rider.display_name}
-                                </span>
-                                <span className="block text-sm text-gray-500">
-                                  {rider.email}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="h-px w-72 whitespace-nowrap">
-                          <div className="px-6 py-3">
-                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                              {rider.location}
-                            </span>
-                            <span className="block text-sm text-gray-500">
-                              {rider.phone_number}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
-                          {returnStatus(rider.is_varified)}
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
-                          <div className="px-6 py-3">
-                            <div className="flex items-center gap-x-3">
-                              <span className="text-xs text-gray-500">
-                                {rider.driving_licence_number}
-                              </span>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
-                          <div className="px-6 py-3">
-                            <span className="text-sm text-gray-500">
-                              {convertTime(rider.created_time)}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
-                          <div className="px-6 py-1.5">
-                            <a
-                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                              href="#"
-                              onClick={() => approve(rider.uid)}
-                            >
-                              See More
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-
-                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      <span className="font-semibold text-gray-800 dark:text-gray-800">
-                        {riders.length}
-                      </span>{" "}
-                      Hotels
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="inline-flex gap-x-2">
-                      <button
-                        type="button"
-                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-200 dark:text-gray-800 dark:hover:bg-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      >
-                        <svg
-                          className="flex-shrink-0 w-4 h-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="m15 18-6-6 6-6" />
-                        </svg>
-                        Prev
-                      </button>
-
-                      <button
-                        type="button"
-                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-200 dark:text-gray-800 dark:hover:bg-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      >
-                        Next
-                        <svg
-                          className="flex-shrink-0 w-4 h-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="m9 18 6-6-6-6" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="dark:bg-gray-50 ">
+        <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
+          <div class="flex items-center py-4">
+            <button
+              type="button"
+              class="text-gray-500 hover:text-gray-600"
+              data-hs-overlay="#application-sidebar"
+              aria-controls="application-sidebar"
+              aria-label="Toggle navigation"
+            >
+              <span class="sr-only">Toggle Navigation</span>
+              <svg
+                class="flex-shrink-0 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="3" x2="21" y1="6" y2="6" />
+                <line x1="3" x2="21" y1="12" y2="12" />
+                <line x1="3" x2="21" y1="18" y2="18" />
+              </svg>
+            </button>
           </div>
+        </div>
+        {/* Main topic */}
+        <div
+          id="application-sidebar"
+          class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="px-6">
+            <a
+              class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              href="#"
+              aria-label="Brand"
+            >
+              Vojo
+            </a>
+          </div>
+{/* Navbar*/}
+          <nav
+            class="hs-accordion-group p-6 w-full flex flex-col flex-wrap"
+            data-hs-accordion-always-open
+          >
+            <ul class="space-y-1.5">
+              {/* List view*/}
+              {/* Home*/}
+              
+              <li class="hs-accordion" id="users-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/dashboard")}
+                  >
+                 <svg
+                    class="flex-shrink-0 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                  Home
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+              {/* User*/}
+              <li class="hs-accordion" id="users-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/userList")}   
+                >
+                  <svg
+                    class="flex-shrink-0 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Users
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+              {/* Rider*/}
+              <li class="hs-accordion" id="riders-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/riderList")}
+                >
+                  <svg
+                    class="flex-shrink-0 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Riders
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+              {/* Hotels*/}
+              <li>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
+                  href="http://localhost:5173/hotelList"
+                >
+                   <svg
+                    class="flex-shrink-0 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Hotels
+                </a>
+              </li>
+              
+              {/* AdminAccounts*/}
+              <li class="hs-accordion" id="account-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/adminProfiles")}
+                >
+                  <svg
+                    class="flex-shrink-0 mt-0.5 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="18" cy="15" r="3" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M10 15H6a4 4 0 0 0-4 4v2" />
+                    <path d="m21.7 16.4-.9-.3" />
+                    <path d="m15.2 13.9-.9-.3" />
+                    <path d="m16.6 18.7.3-.9" />
+                    <path d="m19.1 12.2.3-.9" />
+                    <path d="m19.6 18.7-.4-1" />
+                    <path d="m16.8 12.3-.4-1" />
+                    <path d="m14.3 16.6 1-.4" />
+                    <path d="m20.7 13.8 1-.4" />
+                  </svg>
+                   Admin Accounts
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                
+                </button>
+                </li>
+              {/* Journeys*/}
+              <li class="hs-accordion" id="projects-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/journeyList")}
+                  
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+                  Journeys
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+              {/* Payments*/}
+              <li class="hs-accordion" id="projects-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/payments")}
+                  
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+                  Payments
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+               {/*Comment and Reviews*/}
+              <li>
+              <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/comments_and_reviews")}
+                  
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+                  Comments and Reviews
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
+               {/* Settings*/}
+              <li>
+                <a
+                  class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+             
+                  Settings
+                </a>
+              </li>
+            </ul>
+            {/* Sign Out*/}
+            <div >
+            <a
+                  class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="/"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+	<path fill="currentColor" d="M4 12a1 1 0 0 0 1 1h7.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76a1 1 0 0 0-.21-.33l-4-4a1 1 0 1 0-1.42 1.42l2.3 2.29H5a1 1 0 0 0-1 1M17 2H7a3 3 0 0 0-3 3v3a1 1 0 0 0 2 0V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a1 1 0 0 0-2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3" />
+</svg>
+                  Sign Out
+                </a>
+        
+            </div>
+          </nav>
+        </div>
+
+        <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+
+      
+        <HotelListTable/>
+       
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default HotelListPage;
+export default HotelListPage

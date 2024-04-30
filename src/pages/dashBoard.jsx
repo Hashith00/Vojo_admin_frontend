@@ -1,12 +1,20 @@
-import React from 'react'
-import RiderListTable from './riderListTable'
-
+import React from "react";
+import Statistics from "../components/stat";
+import RiderListTable from "./riderListTable";
+import HotelListTable from "./hotelListTable";
+import { useNavigate } from "react-router-dom";
 import { navigateToPage } from "../navigations/navigations";
 
-function riderListPage() {
+
+
+//Dash board
+function Dashboard() {
+  
+
+
   return (
     <>
-    <div class="dark:bg-gray-50 ">
+      <div class="dark:bg-gray-50 ">
         <div class="sticky top-0 inset-x-0 z-20 dark:bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden  dark:border-gray-700">
           <div class="flex items-center py-4">
             <button
@@ -58,11 +66,10 @@ function riderListPage() {
             <ul class="space-y-1.5">
               {/* List view*/}
               {/* Home*/}
-              <li class="hs-accordion" id="users-accordion">
-                <button
-                  type="button"
-                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  onClick={navigateToPage("/dashboard")}
+              <li>
+              <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
+                  href="http://localhost:5173/dashboard"
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -80,22 +87,7 @@ function riderListPage() {
                     <polyline points="9 22 9 12 15 12 15 22" />
                   </svg>
                   Home
-                  <svg
-                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m18 15-6-6-6 6" />
-                  </svg>
-                  
-                </button>
+                </a>
               </li>
               {/* User*/}
               <li class="hs-accordion" id="users-accordion">
@@ -140,10 +132,11 @@ function riderListPage() {
                 </button>
               </li>
               {/* Rider*/}
-              <li>
-              <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
-                  href="http://localhost:5173/riderList"
+              <li class="hs-accordion" id="riders-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/riderList")}
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -163,9 +156,23 @@ function riderListPage() {
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                   Riders
-                </a>
-                </li>
-              
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+              </li>
               {/* Hotels*/}
               <li class="hs-accordion" id="users-accordion">
                 <button
@@ -214,6 +221,7 @@ function riderListPage() {
                   type="button"
                   class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   onClick={navigateToPage("/adminProfiles")}
+                  
                 >
                   <svg
                     class="flex-shrink-0 mt-0.5 w-4 h-4"
@@ -256,7 +264,7 @@ function riderListPage() {
                   </svg>
                 
                 </button>
-                </li>
+              </li>
               {/* Journeys*/}
               <li class="hs-accordion" id="projects-accordion">
                 <button
@@ -356,21 +364,25 @@ function riderListPage() {
                   href="/"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-	                 <path fill="currentColor" d="M4 12a1 1 0 0 0 1 1h7.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76a1 1 0 0 0-.21-.33l-4-4a1 1 0 1 0-1.42 1.42l2.3 2.29H5a1 1 0 0 0-1 1M17 2H7a3 3 0 0 0-3 3v3a1 1 0 0 0 2 0V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a1 1 0 0 0-2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3" />
-                   </svg>
+	<path fill="currentColor" d="M4 12a1 1 0 0 0 1 1h7.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76a1 1 0 0 0-.21-.33l-4-4a1 1 0 1 0-1.42 1.42l2.3 2.29H5a1 1 0 0 0-1 1M17 2H7a3 3 0 0 0-3 3v3a1 1 0 0 0 2 0V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a1 1 0 0 0-2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3" />
+</svg>
                   Sign Out
                 </a>
         
             </div>
           </nav>
         </div>
-           <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-              <RiderListTable/>
-           </div>
-     </div>
+
+        <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+
+        <Statistics/>
         
-        </>
-  )
+          
+          
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default riderListPage
+export default Dashboard;

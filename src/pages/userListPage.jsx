@@ -1,9 +1,10 @@
 import React from 'react'
-import RiderListTable from './riderListTable'
+
 
 import { navigateToPage } from "../navigations/navigations";
+import UserListTable from './userListTable';
 
-function riderListPage() {
+function userListPage() {
   return (
     <>
     <div class="dark:bg-gray-50 ">
@@ -97,14 +98,15 @@ function riderListPage() {
                   
                 </button>
               </li>
-              {/* User*/}
-              <li class="hs-accordion" id="users-accordion">
-                <button
-                  type="button"
-                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  onClick={navigateToPage("/userList")}
+              
+              
+              {/*user */}
+              <li>
+              <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
+                  href="http://localhost:5173/riderList"
                 >
-                  <svg
+                 <svg
                     class="flex-shrink-0 w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -137,13 +139,14 @@ function riderListPage() {
                     <path d="m18 15-6-6-6 6" />
                   </svg>
                   
-                </button>
-              </li>
+                </a>
+                </li>
               {/* Rider*/}
-              <li>
-              <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
-                  href="http://localhost:5173/riderList"
+              <li class="hs-accordion" id="users-accordion">
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/riderList")}
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4"
@@ -163,8 +166,9 @@ function riderListPage() {
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                   Riders
-                </a>
-                </li>
+                  
+                </button>
+              </li>
               
               {/* Hotels*/}
               <li class="hs-accordion" id="users-accordion">
@@ -365,7 +369,7 @@ function riderListPage() {
           </nav>
         </div>
            <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-              <RiderListTable/>
+              <UserListTable/>
            </div>
      </div>
         
@@ -373,4 +377,4 @@ function riderListPage() {
   )
 }
 
-export default riderListPage
+export default userListPage

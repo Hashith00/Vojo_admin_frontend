@@ -8,27 +8,18 @@ function LandingPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  var url;
-    if (import.meta.env.VITE_ENVIRENOMNET == "developmet") {
-      url = "http://localhost:4000";
-    } else {
-      url = import.meta.env.VITE_PRODUCTION_URL;
-    }
-
   function handleSubmit() {
-    // This is for the separation dev and production envirenments
-    console.log(import.meta.env.VITE_PRODUCTION_URL)
-
     axios
-      .post(import.meta.env.VITE_PRODUCTION_URL + "/api/auth", {
+      .post("http://localhost:1000/api/auth", {
         email: email,
         password: password,
       })
       .then((response) => {
-        console.log(response.data.code);
-        if (response.data.code == 200) {
-          console.log(response.data.message);
+        console.log(response.data.message);
+        if (response.data.message == "Access Granted") {
+          alert(response.data.message);
           navigate("/dashboard");
+          console.log(response.data.message);
         } else {
           console.log(response.data.message);
           alert(response.data.message);
@@ -48,12 +39,10 @@ function LandingPage() {
 
               <div className="mt-4 md:mb-12 max-w-2xl">
                 <h1 className="mb-4 font-semibold text-gray-800 text-4xl lg:text-5xl dark:text-gray-800">
-                  Approve or delete users and service providers,See statistics
+                    See overall summary.Approve or delete users and service providers
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                  We provide you with a test account that can be set up in
-                  seconds. Our main focus is getting responses to you as soon as
-                  we can.
+                <p className="text-red-600 dark:text-gray-400">
+                  Admin 
                 </p>
               </div>
 
@@ -95,8 +84,8 @@ function LandingPage() {
                       </div>
                       <div className="text-xs text-gray-500">
                         Director | Vojo
-                      </div>
                     </div>
+                  </div>
                   </div>
                 </footer>
               </blockquote>
@@ -188,7 +177,7 @@ function LandingPage() {
                         <button
                           type="submit"
                           className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                          onClick={() => handleSubmit()}
+                          onClick={handleSubmit}
                         >
                           Log In
                         </button>
