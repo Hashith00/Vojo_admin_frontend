@@ -12,7 +12,7 @@ import SignInAccount from "./components/Sign_In_Account";
 import PaymentsPage from "./pages/PaymentsPage";
 import RiderPaymentsPage from "./pages/riderPaymentsPage";
 import HotelPaymentsPage from "./pages/hotelPaymentsPage";
-//import UserPaymentsPage from "./pages/userPaymentsPage";
+import UserPaymentsPage from "./pages/userPaymentsPage";
 import HotelDetailsPage from "./pages/hotelDetailsPage";
 import UserListPage from "./pages/userListPage";
 import CommnentPage from "./pages/comments";
