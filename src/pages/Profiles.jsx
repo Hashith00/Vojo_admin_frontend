@@ -231,7 +231,7 @@ function AdminProfiles() {
               <li>
                 <a
                   class="flex items-center gap-x-3.5 py-2 px-2.5 dark:bg-gray-100 text-sm dark:text-slate-700 rounded-lg hover:bg-gray-100  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-100"
-                  href="http://localhost:5173/adminProfiles"
+                  href="http://localhost:8080/adminProfiles"
                 >
                    <svg
                     class="flex-shrink-0 mt-0.5 w-4 h-4"
@@ -382,7 +382,7 @@ function AdminProfiles() {
       <a class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:none"
               href="#"
               aria-label="Brand">
-      <img class="rounded-lg size-20" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Image Description"/>
+      <img class="rounded-lg size-20" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=400&h=400&q=80" alt="Image Description"/>
       </a>
       <div class="sm:flex sm:flex-col sm:h-full">
         <div>
@@ -402,7 +402,7 @@ function AdminProfiles() {
     <a class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:none"
               href="#"
               aria-label="Brand">
-      <img class="rounded-lg size-20" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Image Description"/>
+      <img class="rounded-lg size-20" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=400&h=400&q=80" alt="Image Description" />
        </a>
       <div class="sm:flex sm:flex-col sm:h-full">
         <div>

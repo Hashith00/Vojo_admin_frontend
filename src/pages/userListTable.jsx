@@ -33,7 +33,7 @@ function UserListTable() {
   const approve = async (id) => {
     try {
       const responce = await axios.post(
-        "http://localhost:1000/api/update-status",
+        "http://localhost:4000/api/update-status",
         { id }
       );
       guestUsers();
@@ -50,7 +50,7 @@ function UserListTable() {
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:1000/api/riders");
+        const responce = await axios.get("http://localhost:4000/api/users");
         setRiders(responce.data);
       } catch (e) {
         console.log(e);

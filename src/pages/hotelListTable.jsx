@@ -32,7 +32,7 @@ function HotelListTable() {
   const approve = async (id) => {
     try {
       const responce = await axios.post(
-        "http://localhost:1000/api/update-status",
+        "http://localhost:4000/api/update-status",
         { id }
       );
       console.log(responce.status);
