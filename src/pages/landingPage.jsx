@@ -74,7 +74,7 @@ function LandingPage() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                        src="https://media.licdn.com/dms/image/C4E03AQGThJ83aFw9Vw/profile-displayphoto-shrink_100_100/0/1632378899733?e=1720051200&v=beta&t=mjDHDm-WfAHwg3stSbtV-TupBmPh7x5SB72NwYa1JrY"
                         alt="Image Description"
                       />
                     </div>
