@@ -40,12 +40,6 @@ function App() {
         <Route path="/journeyList" element={<JourneyPage/>}></Route>
         <Route path="/chat" element={<ChatApp/>}></Route>
 
-        
-
-       
-        
-        
-
       </Routes>
     </>
   );

@@ -46,6 +46,15 @@ function RiderListTable() {
     }
   };
 
+  const displayDetails = async (id) => {
+    try {
+      navigate("/riderDetails",{state:{uid:id}})
+      
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const [riders, setRiders] = useState([]);
   useEffect(() => {
     const getusers = async () => {
@@ -271,7 +280,7 @@ function RiderListTable() {
                           <div className="px-6 py-1.5">
                             <a
                               className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                              href="#"
+                              
                               onClick={() => approve(rider.uid)}
                             >
                               Change Status
@@ -282,8 +291,8 @@ function RiderListTable() {
                           <div className="px-6 py-1.5">
                             <a
                               className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                              href="#"
-                              //onClick={() => approve(rider.uid)}
+                              
+                              onClick={() => displayDetails(rider.uid)}
                             >
                               More Details
                             </a>
