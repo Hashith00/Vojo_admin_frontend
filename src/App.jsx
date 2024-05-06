@@ -18,6 +18,9 @@ import UserListPage from "./pages/userListPage";
 import CommnentPage from "./pages/comments";
 import JourneyPage from "./pages/journeys";
 import ChatApp from "./pages/chat";
+import CurrentjourneyPage from "./pages/currentjourneyPage";
+import UpcomingJourneyPage from "./pages/upcomingJourneyPage";
+import PastJourneyPage from "./pages/pastJourneyPage";
 function App() {
   return (
     <>
@@ -37,6 +40,9 @@ function App() {
         <Route path="/payments" element={<PaymentsPage/>}></Route>
         <Route path="/userList" element={<UserListPage/>}></Route>
         <Route path="/comments_and_reviews" element={<CommnentPage/>}></Route>
+        <Route path="/currentjourneys" element={<CurrentjourneyPage/>}></Route>
+        <Route path="/upcomingjourneys" element={<UpcomingJourneyPage/>}></Route>
+        <Route path="/pastjourneys" element={<PastJourneyPage/>}></Route>
         <Route path="/journeyList" element={<JourneyPage/>}></Route>
         <Route path="/chat" element={<ChatApp/>}></Route>
 

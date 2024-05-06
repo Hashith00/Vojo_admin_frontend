@@ -1,6 +1,5 @@
 import React from "react";
 
-const DISPLAY_ID=Locate.state.uid;
 
 function RiderDetails() {
   return (
