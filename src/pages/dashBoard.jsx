@@ -1,8 +1,6 @@
 import React from "react";
 import Statistics from "../components/stat";
-import RiderListTable from "./riderListTable";
-import HotelListTable from "./hotelListTable";
-import { useNavigate } from "react-router-dom";
+
 import { navigateToPage } from "../navigations/navigations";
 
 
@@ -346,6 +344,33 @@ function Dashboard() {
                   
                 </button>
               </li>
+              <li>
+                <button
+                  type="button"
+                  class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={navigateToPage("/chat")}
+                  
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 17l2 2l4-4M3 7l2 2l4-4m4 1h8m-8 6h8m-8 6h8"/></svg>
+                 Chat
+                  <svg
+                    class="hs-accordion-active:block ms-auto hidden w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m18 15-6-6-6 6" />
+                  </svg>
+                  
+                </button>
+                  
+                </li>
                {/* Settings*/}
               <li>
                 <a
