@@ -1,9 +1,61 @@
-
 import React from "react";
+import { useLocation,useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 
 function HotelDetails() {
+
+  const Locate=useLocation();
+  
+  const ID=Locate.state.userid;
+  
+  const URL=`http://localhost:4000/api/hotels/${ID}`;
+
+  const [updatedName, setUpdatedName] = useState("");
+  const [availablity, setAvailability] = useState(false);
+  const [description,setDescription] =useState("");
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [noRooms, setNoRooms] = useState(0);
+  const [photo, setPhoto] = useState("");
+  const [joinedTime, setJoinedTime] = useState("");
+  const [price, setPrice] = useState(0);
+  useEffect(() => {
+    const getServiceUser = async () => {
+      try {
+        await axios.get(URL)
+        .then((response)=>{setName(response.data.hotelName);
+          setAvailability(response.data.availability);
+          //setEmail(response.data.email);
+          setDescription(response.data.des);
+          setLocation(response.data.location);
+          setPhoto(response.data.photo_url);
+          setNoRooms(response.data.numberOfRooms);
+          setPrice(response.data.price);
+          
+          
+        })
+          
+        } catch (e) {
+        console.log(e);
+      }
+    };
+    getServiceUser();
+  }, [updatedName]);
+
+  const convertTime = (joinedTime) => {
+    if (!joinedTime || !joinedTime._seconds || !joinedTime._nanoseconds) {
+      return "Invalid timestamp";
+  }
+  
+  const firebaseTimestamp =joinedTime;
+  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
+  return date.toLocaleString();
+  };
+  
   return (
     <>
+    
       <div className="w-full h-[250px]">
         <img
           src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg"
@@ -12,11 +64,11 @@ function HotelDetails() {
       </div>
       <div class="flex flex-col items-center -mt-40">
         <img
-          src="src\assets\hotel.jpeg"
+          src={photo}
           class="w-40 h-40 border-4 border-white rounded-full"
         />
         <div className="flex items-center space-x-2 mt-5">
-          <p className="text-2xl">Hilton Colombo</p>
+          <p className="text-2xl">{name}</p>
           <span className="bg-blue-500 rounded-full p-1" title="Verified">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -35,39 +87,8 @@ function HotelDetails() {
           </span>
         </div>
         <p className="text-gray-700">
-        2 Sir Chittampalam A Gardiner Mawatha, Colombo 02
+        {location}
         </p>
-        <p className="text-sm text-gray-500">Colombo</p>
-      </div>
-      <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2 gap-2">
-        <div class="flex items-center space-x-4 mt-2">
-          <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-            </svg>
-            <span>Approve</span>
-          </button>
-          <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            <span>Remove</span>
-          </button>
-        </div>
       </div>
 
       <div className="my-4 ">
@@ -77,23 +98,23 @@ function HotelDetails() {
             <ul class="mt-2 text-gray-700 justify-center">
             <li class="flex border-b py-2">
                 <span class="font-bold w-24">Avaiablity :</span>
-                <span class="text-gray-700">True</span>
+                <span class="text-gray-700">{availablity}</span>
               </li>
               <li class="flex border-y py-2">
                 <span class="font-bold w-24">Hotel name:</span>
-                <span class="text-gray-700">Hilton Colombo</span>
+                <span class="text-gray-700">{name}</span>
               </li>
 
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Location</span>
-                <span class="text-gray-700">Colombo</span>
+                <span class="font-bold w-24">Location: </span>
+                <span class="text-gray-700">{location}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Mobile:</span>
+                <span class="font-bold w-24">Mobile: </span>
                 <span class="text-gray-700">(123) 123-1234</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Email:</span>
+                <span class="font-bold w-24">Email: </span>
                 <span class="text-gray-700">hotelname@example.com</span>
               </li>
               <li class="flex border-b py-2">
@@ -102,11 +123,11 @@ function HotelDetails() {
               </li>
               <li class="flex border-b py-2">
                 <span class="font-bold w-24">Number of Rooms :</span>
-                <span class="text-gray-700"> 5 </span>
+                <span class="text-gray-700"> {noRooms} </span>
               </li>
               <li class="flex border-b py-2">
                 <span class="font-bold w-24">Price :</span>
-                <span class="text-gray-700"> 120 USD</span>
+                <span class="text-gray-700"> {price}</span>
               </li>
             </ul>
           </div>
