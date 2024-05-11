@@ -22,12 +22,13 @@ function UserListTable() {
 
   // Formated the date and time
   const convertTime = (created_time) => {
-    const firebaseTimestamp = created_time;
-    const date = new Date(
-      firebaseTimestamp._seconds * 1000 +
-        firebaseTimestamp._nanoseconds / 1000000
-    );
-    return date.toLocaleString();
+    if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
+      return "Invalid timestamp";
+  }
+  
+  const firebaseTimestamp = created_time;
+  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
+  return date.toLocaleString();
   };
 
   const approve = async (id) => {
@@ -36,7 +37,7 @@ function UserListTable() {
         "http://localhost:4000/api/update-status",
         { id }
       );
-      guestUsers();
+      getUsers();
       console.log(responce.status);
       if(responce.status == "")
       setUpdatedName("Updated");
@@ -46,18 +47,18 @@ function UserListTable() {
     }
   };
 
-  const [riders, setRiders] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     const getusers = async () => {
       try {
         const responce = await axios.get("http://localhost:4000/api/users");
-        setRiders(responce.data);
+        setUsers(responce.data);
       } catch (e) {
         console.log(e);
       }
     };
     getusers();
-    console.log(riders);
+    console.log(users);
   }, [updatedName]);
 
   // Show status
@@ -132,7 +133,7 @@ function UserListTable() {
                       Users
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                     details of journeys
+                     Details of journeys
                     </p>
                   </div>
 
@@ -182,14 +183,14 @@ function UserListTable() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            start destination
+                            Location
                           </span>
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            end destination
+                            Phone Number
                           </span>
                         </div>
                       </th>
@@ -197,7 +198,15 @@ function UserListTable() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Start Time
+                            Joined Time
+                          </span>
+                        </div>
+                      </th>
+
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            Address
                           </span>
                         </div>
                       </th>
@@ -208,7 +217,7 @@ function UserListTable() {
                   </thead>
 
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {riders.map((rider) => (
+                    {users.map((user) => (
                       <tr>
                         <td className="h-px w-px whitespace-nowrap">
                           <div className="ps-6 py-3">
@@ -224,15 +233,12 @@ function UserListTable() {
                             <div className="flex items-center gap-x-3">
                               <span class="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-300 dark:bg-gray-700">
                                 <span class="font-medium text-gray-800 leading-none dark:text-gray-200">
-                                  {rider.display_name.charAt(0)}
+                                  {user.email.charAt(0)}
                                 </span>
                               </span>
                               <div className="grow">
                                 <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                                  {rider.display_name}
-                                </span>
-                                <span className="block text-sm text-gray-500">
-                                  {rider.email}
+                                  {user.display_name}
                                 </span>
                               </div>
                             </div>
@@ -241,54 +247,39 @@ function UserListTable() {
                         <td className="h-px w-72 whitespace-nowrap">
                           <div className="px-6 py-3">
                             <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                              {rider.location}
-                            </span>
-                            <span className="block text-sm text-gray-500">
-                              {rider.phone_number}
+                              {user.email}
                             </span>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
-                          {returnStatus(rider.is_varified)}
-                        </td>
-                        <td className="h-px w-px whitespace-nowrap">
                           <div className="px-6 py-3">
-                            <div className="flex items-center gap-x-3">
                               <span className="text-xs text-gray-500">
-                                {rider.driving_licence_number}
+                               {user.location}
                               </span>
-                            </div>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
                           <div className="px-6 py-3">
                             <span className="text-sm text-gray-500">
-                              {convertTime(rider.created_time)}
+                              {user.phone_number}
                             </span>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
-                          <div className="px-6 py-1.5">
-                            <a
-                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                              href="#"
-                              onClick={() => approve(rider.uid)}
-                            >
-                              Change Status
-                            </a>
+                          <div className="px-6 py-3">
+                            <span className="text-sm text-gray-500">
+                              {convertTime(user.created_time)}
+                            </span>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
-                          <div className="px-6 py-1.5">
-                            <a
-                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                              href="#"
-                              //onClick={() => approve(rider.uid)}
-                            >
-                              More Details
-                            </a>
+                          <div className="px-6 py-3">
+                            <span className="text-sm text-gray-500">
+                              {user.address}
+                            </span>
                           </div>
                         </td>
+                        
                       </tr>
                     ))}
                   </tbody>
@@ -298,7 +289,7 @@ function UserListTable() {
                   <div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       <span className="font-semibold text-gray-800 dark:text-gray-800">
-                        {riders.length}
+                        {users.length}
                       </span>{" "}
                       Users
                     </p>
