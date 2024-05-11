@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { navigateToPage } from "../navigations/navigations";
 
 const users = [
   {
@@ -21,12 +22,13 @@ function HotelListTable() {
 
   // Formated the date and time
   const convertTime = (created_time) => {
-    const firebaseTimestamp = created_time;
-    const date = new Date(
-      firebaseTimestamp._seconds * 1000 +
-        firebaseTimestamp._nanoseconds / 1000000
-    );
-    return date.toLocaleString();
+    if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
+      return "Invalid timestamp";
+  }
+  
+  const firebaseTimestamp = created_time;
+  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
+  return date.toLocaleString();
   };
 
   const approve = async (id) => {
@@ -42,11 +44,20 @@ function HotelListTable() {
     }
   };
 
+  const displayDetails = async (id) => {
+    try {
+      navigate("/hotelDetails",{state:{userid:id}})
+  
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const [hotels, setHotels] = useState([]);
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:1000/api/hotels");
+        const responce = await axios.get("http://localhost:4000/api/hotels");
         setHotels(responce.data);
       } catch (e) {
         console.log(e);
@@ -279,9 +290,9 @@ function HotelListTable() {
                           <a
                             className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                             href="#"
-                            //onClick={() => approve(hotel.uid)}
+                            onClick={() => displayDetails(hotel.uid)}
                           >
-                            More Details
+                            {hotel.uid}
                           </a>
                         </div>
                       </td>
