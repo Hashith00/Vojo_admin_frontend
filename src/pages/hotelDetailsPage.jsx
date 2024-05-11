@@ -7,9 +7,10 @@ function HotelDetails() {
 
   const Locate=useLocation();
   
-  const ID=Locate.state.userid;
+  const UID=Locate.state.userid;
   
-  const URL=`http://localhost:4000/api/hotels/${ID}`;
+  const URL=`http://localhost:4000/api/hotels/${UID}`;
+  const ownerURL=`http://localhost:4000/api/serviceUsers/${UID}`;
 
   const [updatedName, setUpdatedName] = useState("");
   const [availablity, setAvailability] = useState(false);
@@ -18,10 +19,17 @@ function HotelDetails() {
   const [location, setLocation] = useState("");
   const [noRooms, setNoRooms] = useState(0);
   const [photo, setPhoto] = useState("");
-  const [joinedTime, setJoinedTime] = useState("");
+  
   const [price, setPrice] = useState(0);
+  const [displayAvailablity, setDisplayAvailablity] = useState("");
+
+  const [ownerName, setOwnerName] = useState("");
+  const [joinedTime, setJoinedTime] = useState("");
+  const [email, setEmail] = useState(0);
+  const [phoneNo, setPhoneNo] = useState("");
+  
   useEffect(() => {
-    const getServiceUser = async () => {
+    const getHotel = async () => {
       try {
         await axios.get(URL)
         .then((response)=>{setName(response.data.hotelName);
@@ -29,7 +37,7 @@ function HotelDetails() {
           //setEmail(response.data.email);
           setDescription(response.data.des);
           setLocation(response.data.location);
-          setPhoto(response.data.photo_url);
+          setPhoto(response.data.photourl);
           setNoRooms(response.data.numberOfRooms);
           setPrice(response.data.price);
           
@@ -40,7 +48,29 @@ function HotelDetails() {
         console.log(e);
       }
     };
-    getServiceUser();
+    getHotel();
+    const getOwnerDetails = async () => {
+      try {
+        await axios.get(ownerURL)
+        .then((response)=>{
+          setOwnerName(response.data.display_name);
+          setJoinedTime(response.data.created_time);
+          setEmail(response.data.email);
+          setPhoneNo(response.data.phone_number);
+          
+          
+        })
+          
+        } catch (e) {
+        console.log(e);
+      }
+    };
+    getOwnerDetails();
+    if(availablity == true){
+      setDisplayAvailablity("Yes");
+    }else{
+      setDisplayAvailablity("No");
+    }
   }, [updatedName]);
 
   const convertTime = (joinedTime) => {
@@ -98,28 +128,20 @@ function HotelDetails() {
             <ul class="mt-2 text-gray-700 justify-center">
             <li class="flex border-b py-2">
                 <span class="font-bold w-24">Avaiablity :</span>
-                <span class="text-gray-700">{availablity}</span>
+                <span class="text-gray-700">{displayAvailablity}</span>
               </li>
               <li class="flex border-y py-2">
-                <span class="font-bold w-24">Hotel name:</span>
+                <span class="font-bold w-24">Hotel name :</span>
                 <span class="text-gray-700">{name}</span>
               </li>
 
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Location: </span>
+                <span class="font-bold w-24">Location : </span>
                 <span class="text-gray-700">{location}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Mobile: </span>
-                <span class="text-gray-700">(123) 123-1234</span>
-              </li>
-              <li class="flex border-b py-2">
-                <span class="font-bold w-24">Email: </span>
-                <span class="text-gray-700">hotelname@example.com</span>
-              </li>
-              <li class="flex border-b py-2">
-                <span class="font-bold w-24">Location:</span>
-                <span class="text-gray-700">New York, US</span>
+                <span class="font-bold w-24">Description : </span>
+                <span class="text-gray-700">{description}</span>
               </li>
               <li class="flex border-b py-2">
                 <span class="font-bold w-24">Number of Rooms :</span>
@@ -128,6 +150,32 @@ function HotelDetails() {
               <li class="flex border-b py-2">
                 <span class="font-bold w-24">Price :</span>
                 <span class="text-gray-700"> {price}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="my-4 ">
+        <div class="w-full flex flex-col 2xl:w-1/3">
+          <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+            <h4 class="text-xl text-gray-900 font-bold">Owner Info</h4>
+            <ul class="mt-2 text-gray-700 justify-center">
+            <li class="flex border-b py-2">
+                <span class="font-bold w-24">Name :</span>
+                <span class="text-gray-700">{ownerName}</span>
+              </li>
+              <li class="flex border-y py-2">
+                <span class="font-bold w-24">Email :</span>
+                <span class="text-gray-700">{email}</span>
+              </li>
+
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Phone Number : </span>
+                <span class="text-gray-700">{phoneNo}</span>
+              </li>
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Joined Date : </span>
+                <span class="text-gray-700">{convertTime(joinedTime)}</span>
               </li>
             </ul>
           </div>

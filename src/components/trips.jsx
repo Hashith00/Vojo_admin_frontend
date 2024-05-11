@@ -16,55 +16,24 @@ const users = [
   },
 ];
 
-function HotelListTable() {
+function Trips() {
   // This updatename is purely for call the useEffect when status of the hotel is updated
   const [updatedName, setUpdatedName] = useState("");
 
-  // Formated the date and time
-  const convertTime = (created_time) => {
-    if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
-      return "Invalid timestamp";
-  }
   
-  const firebaseTimestamp = created_time;
-  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
-  return date.toLocaleString();
-  };
 
-  const approve = async (id) => {
-    try {
-      const responce = await axios.post(
-        "http://localhost:4000/api/update-status",
-        { id }
-      );
-      console.log(responce.status);
-      setUpdatedName("Updated");
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const displayDetails = async (id) => {
-    try {
-      navigate("/hotelDetails",{state:{userid:id}})
-  
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const [hotels, setHotels] = useState([]);
+  const [trips, setTrips] = useState([]);
   useEffect(() => {
-    const getusers = async () => {
+    const getTrips = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/hotels");
-        setHotels(responce.data);
+        const responce = await axios.get("http://localhost:4000/api/trips");
+        setTrips(responce.data);
       } catch (e) {
         console.log(e);
       }
     };
-    getusers();
-    console.log(hotels);
+    getTrips();
+    console.log(trips);
   }, [updatedName]);
 
   // Show status
@@ -136,10 +105,10 @@ function HotelListTable() {
                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-400">
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-800">
-                      Hotels
+                      Trips
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Aprrove hotels, edit and more.
+                      See trips details.
                     </p>
                   </div>
 
@@ -173,7 +142,7 @@ function HotelListTable() {
                       >
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Hotel Name & Email
+                            User
                           </span>
                         </div>
                       </th>
@@ -181,7 +150,14 @@ function HotelListTable() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Location & Contact
+                            Trip Type
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            Start Date
                           </span>
                         </div>
                       </th>
@@ -189,33 +165,38 @@ function HotelListTable() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Status
+                            End Date
                           </span>
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            License Number
+                            Start Destination
                           </span>
                         </div>
                       </th>
-
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                            Created Date & Time
+                            Intermediate Destination
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            End Destination
                           </span>
                         </div>
                       </th>
 
-                      <th scope="col" className="px-6 py-3 text-end"></th>
-                      <th scope="col" className="px-6 py-3 text-end"></th>
+                      
                     </tr>
                   </thead>
 
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {hotels.map((hotel) => (
+                    {trips.map((trip) => (
                       <tr>
                       <td className="h-px w-px whitespace-nowrap">
                         <div className="ps-6 py-3">
@@ -226,73 +207,54 @@ function HotelListTable() {
                           </label>
                         </div>
                       </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                          <div className="flex items-center gap-x-3">
-                            <span class="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-300 dark:bg-gray-700">
-                              <span class="font-medium text-gray-800 leading-none dark:text-gray-200">
-                                {hotel.display_name.charAt(0)}
-                              </span>
-                            </span>
-                            <div className="grow">
-                              <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                                {hotel.display_name}
-                              </span>
-                              <span className="block text-sm text-gray-500">
-                                {hotel.email}
-                              </span>
-                            </div>
-                          </div>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.user_id}
+                          </span>
                         </div>
                       </td>
                       <td className="h-px w-72 whitespace-nowrap">
                         <div className="px-6 py-3">
                           <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {hotel.location}
-                          </span>
-                          <span className="block text-sm text-gray-500">
-                            {hotel.phone_number}
+                            {trip.trip_typr}
                           </span>
                         </div>
                       </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        {returnStatus(hotel.is_varified)}
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
+                      <td className="h-px w-72 whitespace-nowrap">
                         <div className="px-6 py-3">
-                          <div className="flex items-center gap-x-3">
-                            <span className="text-xs text-gray-500">
-                              {hotel.HotelRegistrationNumbert}
-                            </span>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="text-sm text-gray-500">
-                            {convertTime(hotel.created_time)}
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.start_date}
                           </span>
                         </div>
                       </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-1.5">
-                          <a
-                            className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="#"
-                            onClick={() => approve(hotel.uid)}
-                          >
-                            Change Status
-                          </a>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.end_date}
+                          </span>
                         </div>
                       </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-1.5">
-                          <a
-                            className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            onClick={() => displayDetails(hotel.uid)}
-                          >
-                            More Details
-                          </a>
+                      
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.start_location}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.intermediate_location}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.end_location}
+                          </span>
                         </div>
                       </td>
                     </tr>
@@ -304,9 +266,9 @@ function HotelListTable() {
                   <div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       <span className="font-semibold text-gray-800 dark:text-gray-800">
-                        {hotels.length}
+                        {trips.length}
                       </span>{" "}
-                      Hotels
+                      Trips
                     </p>
                   </div>
 
@@ -366,4 +328,4 @@ function HotelListTable() {
   );
 }
 
-export default HotelListTable;
+export default Trips;

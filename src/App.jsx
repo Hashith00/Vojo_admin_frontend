@@ -9,6 +9,8 @@ import AdminProfiles from "./pages/Profiles";
 import HotelListPage from "./pages/hotelListPage";
 import Stats from "./components/stat";
 import SignInAccount from "./components/Sign_In_Account";
+import Bookings from "./components/bookings";
+import Trips from "./components/trips";
 import PaymentsPage from "./pages/PaymentsPage";
 import RiderPaymentsPage from "./pages/riderPaymentsPage";
 import HotelPaymentsPage from "./pages/hotelPaymentsPage";
@@ -21,6 +23,8 @@ import ChatApp from "./pages/chat";
 import CurrentjourneyPage from "./pages/currentjourneyPage";
 import UpcomingJourneyPage from "./pages/upcomingJourneyPage";
 import PastJourneyPage from "./pages/pastJourneyPage";
+import BookingJourneyPage from "./pages/bookingJouneys";
+import TripJourneyPage from "./pages/tripJourneys";
 function App() {
   return (
     <>
@@ -32,6 +36,8 @@ function App() {
         <Route path="/hotelDetails" element={<HotelDetailsPage />}></Route>
         <Route path="/adminProfiles" element={<AdminProfiles/>}></Route>
         <Route path="/hotelList" element={<HotelListPage/>}></Route>
+        <Route path="/bookings" element={<BookingJourneyPage/>}></Route>
+        <Route path="/trips" element={<TripJourneyPage/>}></Route>
         <Route path="/stats" element={<Stats/>}></Route>
         <Route path="/signinaccounts" element={<SignInAccount/>}></Route>
         <Route path="/riderpayments" element={<RiderPaymentsPage/>}></Route>
