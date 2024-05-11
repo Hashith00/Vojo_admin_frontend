@@ -54,6 +54,7 @@ const ChatWindow = () => {
 // Chat Application Component
 function ChatApp() {
   return (
+    <>
     <div className="flex flex-col h-screen">
       {/* Chat Header */}
       <header className="bg-gray-800 text-white p-4">
@@ -64,6 +65,7 @@ function ChatApp() {
         <ChatWindow />
       </main>
     </div>
+    </>
   );
 }
 
