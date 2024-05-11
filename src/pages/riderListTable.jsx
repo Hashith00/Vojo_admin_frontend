@@ -22,12 +22,13 @@ function RiderListTable() {
 
   // Formated the date and time
   const convertTime = (created_time) => {
-    const firebaseTimestamp = created_time;
-    const date = new Date(
-      firebaseTimestamp._seconds * 1000 +
-        firebaseTimestamp._nanoseconds / 1000000
-    );
-    return date.toLocaleString();
+    if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
+      return "Invalid timestamp";
+  }
+  
+  const firebaseTimestamp = created_time;
+  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
+  return date.toLocaleString();
   };
 
   const approve = async (id) => {
