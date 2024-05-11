@@ -10,6 +10,7 @@ function RiderDetails() {
   const DETAIL_ID=Locate.state.uid;
 
   const [updatedName, setUpdatedName] = useState("");
+
   const [name, setname] = useState("");
   const [drivinglicencenumber,setDrivinglicencenumber] =useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +20,20 @@ function RiderDetails() {
   const [photo, setPhoto] = useState("");
   const [vehicleNo, setVehicleNo] = useState("");
   const [joinedTime, setJoinedTime] = useState("");
+
+  const [brand, setBrand] = useState("");
+  const [category,setCategory] =useState("");
+  const [capacity, setCapacity] = useState("");
+  const [color,setColor] = useState("");
+  const [fuelType, setFuelType] = useState("");
+  const [gearType, setGearType] = useState("");
+  const [vehiclePhoto, setvehiclePhoto] = useState("");
+  const [model, setModel] = useState("");
+  const [noPassengers, setNoPassengers] = useState("");
+
   
   const URL=`http://localhost:4000/api/serviceUsers/${DETAIL_ID}`;
+  const vehicleURL=`http://localhost:4000/api/vehicles/${DETAIL_ID}`;
   useEffect(() => {
     const getServiceUser = async (uid) => {
       try {
@@ -43,7 +56,28 @@ function RiderDetails() {
       }
     };
     getServiceUser();
+    const getVehicleDetials = async (uid) => {
+      try {
+        const responce = await axios.get(vehicleURL)
+        .then((response)=>{
+          setCapacity(response.data.capaity);
+          setCategory(response.data.categoty);
+          setColor(response.data.color);
+          setFuelType(response.data.fuel_type);
+          setGearType(response.data.gear_type);
+          setvehiclePhoto(response.data.imageurl);
+          setNoPassengers(response.data.max_passenger);
+          setModel(response.data.model);
+        })
+          
+        } catch (e) {
+        console.log(e);
+      }
+    };
+    getVehicleDetials();
+    
   }, [updatedName]);
+  
 
   const convertTime = (joinedTime) => {
     if (!joinedTime || !joinedTime._seconds || !joinedTime._nanoseconds) {
@@ -69,7 +103,7 @@ function RiderDetails() {
           <img
           src={photo}
           class="w-40 border-4 border-white rounded-full"
-        />
+        width="10%"/>
         <div className="flex items-center space-x-2 mt-2">
           <p className="text-2xl">{name}</p>
           <span className="bg-blue-500 rounded-full p-1" title="Verified">
@@ -99,36 +133,83 @@ function RiderDetails() {
             <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
             <ul class="mt-2 text-gray-700">
               <li class="flex border-y py-2">
-                <span class="font-bold w-24">Full name:</span>
+                <span class="font-bold w-24">Full name :</span>
                 <span class="text-gray-700">{name}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Email:</span>
+                <span class="font-bold w-24">Email :</span>
                 <span class="text-gray-700">{email}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Joined:</span>
+                <span class="font-bold w-24">Joined :</span>
                 <span class="text-gray-700">{convertTime(joinedTime)}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Mobile:</span>
+                <span class="font-bold w-24">Mobile :</span>
                 <span class="text-gray-700">{phoneNo}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Location:</span>
+                <span class="font-bold w-24">Location :</span>
                 <span class="text-gray-700">{location}</span>
               </li>
               <li class="flex border-b py-2">
-                <span class="font-bold w-24">Languages:</span>
+                <span class="font-bold w-24">Languages :</span>
                 <span class="text-gray-700">{languages[0]} {languages[1]} {languages[2]} {languages[3]} {languages[4]}</span>
               </li>
               <li class="flex items-center border-b py-2 space-x-2">
-                <span class="font-bold w-24">Vehicle No:</span>
+                <span class="font-bold w-24">Vehicle No :</span>
                 <span class="text-gray-700">{vehicleNo}</span>
               </li>
               <li class="flex items-center border-b py-2 space-x-2">
-                <span class="font-bold w-24">Driving License No:</span>
+                <span class="font-bold w-24">Driving License No :</span>
                 <span class="text-gray-700">{drivinglicencenumber}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+      <br/><br/>
+      <div className="my-4 ">
+        <div class="w-full flex flex-col 2xl:w-1/3">
+          <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+            <h4 class="text-xl text-gray-900 font-bold">Vehicle Info</h4>
+            <ul class="mt-2 text-gray-700">
+              <li class="flex border-y py-2">
+                <span class="font-bold w-24">Capacity :</span>
+                <span class="text-gray-700">{capacity}</span>
+              </li>
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Category :</span>
+                <span class="text-gray-700">{category}</span>
+              </li>
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Color :</span>
+                <span class="text-gray-700">{color}</span>
+              </li>
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Fuel Type :</span>
+                <span class="text-gray-700">{fuelType}</span>
+              </li>
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Gear Type :</span>
+                <span class="text-gray-700">{gearType}</span>
+              </li>
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">No of Maximum Passenges :</span>
+                <span class="text-gray-700">{noPassengers}</span>
+              </li>
+              <li class="flex items-center border-b py-2 space-x-2">
+                <span class="font-bold w-24">Model :</span>
+                <span class="text-gray-700">{model}</span>
+              </li>
+              <li>
+                <span class="font-bold w-24">Model :</span>
+                <span class="text-gray-700"><img
+                  src={vehiclePhoto}
+                  class="w-40 border-4 border-white "
+                  width="30%"/></span>
+                
               </li>
             </ul>
           </div>
