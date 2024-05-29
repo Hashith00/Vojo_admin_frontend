@@ -73,7 +73,7 @@ function LandingPage() {
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="h-15 w-15 rounded-full"
                         src="https://media.licdn.com/dms/image/C4E03AQGThJ83aFw9Vw/profile-displayphoto-shrink_100_100/0/1632378899733?e=1720051200&v=beta&t=mjDHDm-WfAHwg3stSbtV-TupBmPh7x5SB72NwYa1JrY"
                         alt="Image Description"
                       />

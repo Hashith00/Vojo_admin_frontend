@@ -31,18 +31,7 @@ function HotelListTable() {
   return date.toLocaleString();
   };
 
-  const approve = async (id) => {
-    try {
-      const responce = await axios.post(
-        "http://localhost:4000/api/update-status",
-        { id }
-      );
-      console.log(responce.status);
-      setUpdatedName("Updated");
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  
 
   const displayDetails = async (id) => {
     try {
@@ -54,7 +43,7 @@ function HotelListTable() {
   };
 
   const [hotels, setHotels] = useState([]);
-  useEffect(() => {
+  
     const getusers = async () => {
       try {
         const responce = await axios.get("http://localhost:4000/api/hotels");
@@ -65,7 +54,19 @@ function HotelListTable() {
     };
     getusers();
     console.log(hotels);
-  }, [updatedName]);
+    const approve = async (id) => {
+      try {
+        const responce = await axios.post(
+          "http://localhost:4000/api/update-status",
+          { id }
+        );
+        setHotels(hotels.filter((hotel)=>{return hotel.id!=id;}));
+        console.log(responce.status);
+        setUpdatedName("Updated");
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
   // Show status
   function returnStatus(sts) {
@@ -276,23 +277,20 @@ function HotelListTable() {
                       </td>
                       <td className="h-px w-px whitespace-nowrap">
                         <div className="px-6 py-1.5">
-                          <a
-                            className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="#"
+                          <button
                             onClick={() => approve(hotel.uid)}
-                          >
+                            style={{ color: 'blue', fontSize: '14px' }}>
                             Change Status
-                          </a>
+                          </button>
                         </div>
                       </td>
                       <td className="h-px w-px whitespace-nowrap">
                         <div className="px-6 py-1.5">
-                          <a
-                            className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                          <button
                             onClick={() => displayDetails(hotel.uid)}
-                          >
+                            style={{ color: 'blue', fontSize: '14px' }}>
                             More Details
-                          </a>
+                          </button>
                         </div>
                       </td>
                     </tr>

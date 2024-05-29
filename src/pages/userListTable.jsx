@@ -133,7 +133,7 @@ function UserListTable() {
                       Users
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                     Details of journeys
+                     Details of Users
                     </p>
                   </div>
 
