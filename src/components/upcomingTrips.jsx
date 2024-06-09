@@ -4,37 +4,37 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { navigateToPage } from "../navigations/navigations";
 
-const users = [
-  {
-    name: "Christina Bersh",
-    email: "christina@site.com",
-    vehicle: "Car",
-    Model: "Toyota axio",
-    status: "Pending",
-    filled_details: 4,
-    created_date: "28 Dec, 12:12",
-  },
-];
 
-function Trips() {
+function UpcomingTrips() {
   // This updatename is purely for call the useEffect when status of the hotel is updated
   const [updatedName, setUpdatedName] = useState("");
 
   
 
   const [trips, setTrips] = useState([]);
+  const [user, setUser] = useState();
   useEffect(() => {
     const getTrips = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/trips");
+        const responce = await axios.get("http://localhost:4000/api/upcoming_trips");
         setTrips(responce.data);
       } catch (e) {
         console.log(e);
       }
     };
+    
     getTrips();
     console.log(trips);
   }, [updatedName]);
+
+  const getUser = async (userId) => {
+    try {
+      const responce = await axios.get(`http://localhost:4000/api/users/${userId}`);
+      return responce.data.display_name;
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   // Show status
   function returnStatus(sts) {
@@ -105,10 +105,10 @@ function Trips() {
                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-400">
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-800">
-                      Trips
+                      Upcoming Trips
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      See trips details.
+                      See upcoming trips details
                     </p>
                   </div>
 
@@ -190,8 +190,34 @@ function Trips() {
                           </span>
                         </div>
                       </th>
-
-                      
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            Travelling Mode
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            Distance
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            Duration
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
+                            Cost
+                          </span>
+                        </div>
+                      </th>
                     </tr>
                   </thead>
 
@@ -203,7 +229,7 @@ function Trips() {
                           <label
                             for="hs-at-with-checkboxes-1"
                             className="flex"
-                          >
+                          > 
                           </label>
                         </div>
                       </td>
@@ -217,7 +243,7 @@ function Trips() {
                       <td className="h-px w-72 whitespace-nowrap">
                         <div className="px-6 py-3">
                           <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.trip_typr}
+                            {trip.trip_type}
                           </span>
                         </div>
                       </td>
@@ -257,6 +283,34 @@ function Trips() {
                           </span>
                         </div>
                       </td>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.travelling_Mode}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.distance}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.duration}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="h-px w-72 whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                            {trip.cost}
+                          </span>
+                        </div>
+                      </td>
                     </tr>
                     ))}
                   </tbody>
@@ -268,55 +322,11 @@ function Trips() {
                       <span className="font-semibold text-gray-800 dark:text-gray-800">
                         {trips.length}
                       </span>{" "}
-                      Trips
+                      Upcoming Trips
                     </p>
                   </div>
 
-                  <div>
-                    <div className="inline-flex gap-x-2">
-                      <button
-                        type="button"
-                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-200 dark:text-gray-800 dark:hover:bg-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      >
-                        <svg
-                          className="flex-shrink-0 w-4 h-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="m15 18-6-6 6-6" />
-                        </svg>
-                        Prev
-                      </button>
-
-                      <button
-                        type="button"
-                        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-200 dark:text-gray-800 dark:hover:bg-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      >
-                        Next
-                        <svg
-                          className="flex-shrink-0 w-4 h-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="m9 18 6-6-6-6" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -328,4 +338,4 @@ function Trips() {
   );
 }
 
-export default Trips;
+export default UpcomingTrips;

@@ -1,7 +1,7 @@
 import React from 'react'
-import Upcomingjourneys from '../components/upcomingjourneys'
 import JourneyList from './journeys'
-import Bookings from '../components/bookings'
+import UpcomingBookings from '../components/upcomingBookings'
+import PastBookings from '../components/pastBookings'
 
 function BookingJourneyPage() {
   return (
@@ -10,7 +10,10 @@ function BookingJourneyPage() {
       <JourneyList/>
     </div>
     <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-      <Bookings/>
+      <UpcomingBookings/>
+    </div>
+    <div class="pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+      <PastBookings/>
     </div>
   </div>
   )

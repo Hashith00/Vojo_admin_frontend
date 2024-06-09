@@ -10,7 +10,6 @@ import HotelListPage from "./pages/hotelListPage";
 import Stats from "./components/stat";
 import SignInAccount from "./components/Sign_In_Account";
 import Bookings from "./components/bookings";
-import Trips from "./components/trips";
 import PaymentsPage from "./pages/PaymentsPage";
 import RiderPaymentsPage from "./pages/riderPaymentsPage";
 import HotelPaymentsPage from "./pages/hotelPaymentsPage";
