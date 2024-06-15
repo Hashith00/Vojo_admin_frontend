@@ -10,18 +10,20 @@ function PastBookings() {
   const [username, setUsername] = useState("");
 
   const convertTime = (created_time) => {
-   
-  
-  const firebaseTimestamp = created_time;
-  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
-  return date.toLocaleDateString();
+    const firebaseTimestamp = created_time;
+    const date = new Date(
+      firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6
+    );
+    return date.toLocaleDateString();
   };
 
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     const getBookings = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/past_bookings");
+        const responce = await axios.get(
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/past_bookings`
+        );
         setBookings(responce.data);
       } catch (e) {
         console.log(e);
@@ -31,20 +33,19 @@ function PastBookings() {
     console.log(bookings);
   }, [updatedName]);
 
-  
   const getUserName = async (uid) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/users/${uid}`)
-      .then((response)=>{return response.data.display_name;
-      })
-        
-      } catch (e) {
+      const response = await axios
+        .get(`http://localhost:4000/api/users/${uid}`)
+        .then((response) => {
+          return response.data.display_name;
+        });
+    } catch (e) {
       console.log(e);
     }
   };
   getUserName();
 
-  
   const navigate = useNavigate();
   return (
     <>
@@ -71,7 +72,6 @@ function PastBookings() {
                       >
                         View all
                       </a>
-                      
                     </div>
                   </div>
                 </div>
@@ -79,12 +79,11 @@ function PastBookings() {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-100">
                   <thead className="bg-gray-50 dark:bg-slate-300">
                     <tr>
-                    <th scope="col" className="ps-6 py-3 text-start">
+                      <th scope="col" className="ps-6 py-3 text-start">
                         <label
                           htmlFor="hs-at-with-checkboxes-main"
                           className="flex"
-                        >
-                        </label>
+                        ></label>
                       </th>
 
                       <th
@@ -134,67 +133,64 @@ function PastBookings() {
                           </span>
                         </div>
                       </th>
-
-                      
                     </tr>
                   </thead>
 
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                     {bookings.map((booking) => (
                       <tr>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="ps-6 py-3">
-                          <label
-                            for="hs-at-with-checkboxes-1"
-                            className="flex"
-                          >
-                          </label>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {booking.user_id}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {booking.hotel}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {convertTime(booking.start_date)}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {convertTime(booking.end_date)}
-                          </span>
-                        </div>
-                      </td>
-                      
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {booking.NumberOfRooms}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {booking.price}
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="ps-6 py-3">
+                            <label
+                              for="hs-at-with-checkboxes-1"
+                              className="flex"
+                            ></label>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {booking.user_id}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {booking.hotel}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {convertTime(booking.start_date)}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {convertTime(booking.end_date)}
+                            </span>
+                          </div>
+                        </td>
+
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {booking.NumberOfRooms}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {booking.price}
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
@@ -208,15 +204,12 @@ function PastBookings() {
                       Past Bookings
                     </p>
                   </div>
-
-                  
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

@@ -32,7 +32,7 @@ function RiderPayments() {
   const approve = async (id) => {
     try {
       const responce = await axios.post(
-        "http://localhost:4000/api/update-ststus",
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/update-ststus`,
         { id }
       );
       console.log(responce.status);
@@ -46,7 +46,9 @@ function RiderPayments() {
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/riders");
+        const responce = await axios.get(
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/riders`
+        );
         setRiders(responce.data);
       } catch (e) {
         console.log(e);
@@ -140,7 +142,6 @@ function RiderPayments() {
                       >
                         View all
                       </a>
-
                     </div>
                   </div>
                 </div>
@@ -192,7 +193,7 @@ function RiderPayments() {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-800">
-                             Payment
+                            Payment
                           </span>
                         </div>
                       </th>
@@ -350,8 +351,7 @@ function RiderPayments() {
             </div>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

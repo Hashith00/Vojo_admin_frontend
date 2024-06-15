@@ -24,49 +24,54 @@ function HotelListTable() {
   const convertTime = (created_time) => {
     if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
       return "Invalid timestamp";
-  }
-  
-  const firebaseTimestamp = created_time;
-  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
-  return date.toLocaleString();
-  };
+    }
 
-  
+    const firebaseTimestamp = created_time;
+    const date = new Date(
+      firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6
+    );
+    return date.toLocaleString();
+  };
 
   const displayDetails = async (id) => {
     try {
-      navigate("/hotelDetails",{state:{userid:id}})
-  
+      navigate("/hotelDetails", { state: { userid: id } });
     } catch (e) {
       console.log(e);
     }
   };
 
   const [hotels, setHotels] = useState([]);
-  
-    const getusers = async () => {
-      try {
-        const responce = await axios.get("http://localhost:4000/api/hotels");
-        setHotels(responce.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getusers();
-    console.log(hotels);
-    const approve = async (id) => {
-      try {
-        const responce = await axios.post(
-          "http://localhost:4000/api/update-status",
-          { id }
-        );
-        setHotels(hotels.filter((hotel)=>{return hotel.id!=id;}));
-        console.log(responce.status);
-        setUpdatedName("Updated");
-      } catch (e) {
-        console.log(e);
-      }
-    };
+
+  const getusers = async () => {
+    try {
+      const responce = await axios.get(
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/hotels`
+      );
+      setHotels(responce.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  getusers();
+  console.log(hotels);
+  const approve = async (id) => {
+    try {
+      const responce = await axios.post(
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/update-status`,
+        { id }
+      );
+      setHotels(
+        hotels.filter((hotel) => {
+          return hotel.id != id;
+        })
+      );
+      console.log(responce.status);
+      setUpdatedName("Updated");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   // Show status
   function returnStatus(sts) {
@@ -152,7 +157,6 @@ function HotelListTable() {
                       >
                         View all
                       </a>
-                      
                     </div>
                   </div>
                 </div>
@@ -160,12 +164,11 @@ function HotelListTable() {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-100">
                   <thead className="bg-gray-50 dark:bg-slate-300">
                     <tr>
-                    <th scope="col" className="ps-6 py-3 text-start">
+                      <th scope="col" className="ps-6 py-3 text-start">
                         <label
                           htmlFor="hs-at-with-checkboxes-main"
                           className="flex"
-                        >
-                        </label>
+                        ></label>
                       </th>
 
                       <th
@@ -218,82 +221,83 @@ function HotelListTable() {
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                     {hotels.map((hotel) => (
                       <tr>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="ps-6 py-3">
-                          <label
-                            for="hs-at-with-checkboxes-1"
-                            className="flex"
-                          >
-                          </label>
-                        </div>
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                          <div className="flex items-center gap-x-3">
-                            <span class="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-300 dark:bg-gray-700">
-                              <span class="font-medium text-gray-800 leading-none dark:text-gray-200">
-                                {hotel.display_name.charAt(0)}
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="ps-6 py-3">
+                            <label
+                              for="hs-at-with-checkboxes-1"
+                              className="flex"
+                            ></label>
+                          </div>
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                            <div className="flex items-center gap-x-3">
+                              <span class="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-300 dark:bg-gray-700">
+                                <span class="font-medium text-gray-800 leading-none dark:text-gray-200">
+                                  {hotel.display_name.charAt(0)}
+                                </span>
                               </span>
+                              <div className="grow">
+                                <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                                  {hotel.display_name}
+                                </span>
+                                <span className="block text-sm text-gray-500">
+                                  {hotel.email}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {hotel.location}
                             </span>
-                            <div className="grow">
-                              <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                                {hotel.display_name}
-                              </span>
-                              <span className="block text-sm text-gray-500">
-                                {hotel.email}
+                            <span className="block text-sm text-gray-500">
+                              {hotel.phone_number}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          {returnStatus(hotel.is_varified)}
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <div className="flex items-center gap-x-3">
+                              <span className="text-xs text-gray-500">
+                                {hotel.HotelRegistrationNumbert}
                               </span>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {hotel.location}
-                          </span>
-                          <span className="block text-sm text-gray-500">
-                            {hotel.phone_number}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        {returnStatus(hotel.is_varified)}
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <div className="flex items-center gap-x-3">
-                            <span className="text-xs text-gray-500">
-                              {hotel.HotelRegistrationNumbert}
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="text-sm text-gray-500">
+                              {convertTime(hotel.created_time)}
                             </span>
                           </div>
-                        </div>
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="text-sm text-gray-500">
-                            {convertTime(hotel.created_time)}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-1.5">
-                          <button
-                            onClick={() => approve(hotel.uid)}
-                            style={{ color: 'blue', fontSize: '14px' }}>
-                            Change Status
-                          </button>
-                        </div>
-                      </td>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="px-6 py-1.5">
-                          <button
-                            onClick={() => displayDetails(hotel.uid)}
-                            style={{ color: 'blue', fontSize: '14px' }}>
-                            More Details
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
+                            <button
+                              onClick={() => approve(hotel.uid)}
+                              style={{ color: "blue", fontSize: "14px" }}
+                            >
+                              Change Status
+                            </button>
+                          </div>
+                        </td>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
+                            <button
+                              onClick={() => displayDetails(hotel.uid)}
+                              style={{ color: "blue", fontSize: "14px" }}
+                            >
+                              More Details
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
@@ -358,8 +362,7 @@ function HotelListTable() {
             </div>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

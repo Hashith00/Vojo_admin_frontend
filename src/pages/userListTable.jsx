@@ -19,29 +19,28 @@ function UserListTable() {
   // This updatename is purely for call the useEffect when status of the rider is updated
   const [updatedName, setUpdatedName] = useState("");
 
-
   // Formated the date and time
   const convertTime = (created_time) => {
     if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
       return "Invalid timestamp";
-  }
-  
-  const firebaseTimestamp = created_time;
-  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
-  return date.toLocaleString();
+    }
+
+    const firebaseTimestamp = created_time;
+    const date = new Date(
+      firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6
+    );
+    return date.toLocaleString();
   };
 
   const approve = async (id) => {
     try {
       const responce = await axios.post(
-        "http://localhost:4000/api/update-status",
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/update-status`,
         { id }
       );
       getUsers();
       console.log(responce.status);
-      if(responce.status == "")
-      setUpdatedName("Updated");
-      
+      if (responce.status == "") setUpdatedName("Updated");
     } catch (e) {
       console.log(e);
     }
@@ -51,7 +50,9 @@ function UserListTable() {
   useEffect(() => {
     const getusers = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/users");
+        const responce = await axios.get(
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/users`
+        );
         setUsers(responce.data);
       } catch (e) {
         console.log(e);
@@ -81,7 +82,7 @@ function UserListTable() {
           </span>
         </div>
       );
-    } else if ((sts == null)||(sts ===false )) {
+    } else if (sts == null || sts === false) {
       return (
         <div className=" py-3">
           <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
@@ -133,7 +134,7 @@ function UserListTable() {
                       Users
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                     Details of Users
+                      Details of Users
                     </p>
                   </div>
 
@@ -145,7 +146,6 @@ function UserListTable() {
                       >
                         View all
                       </a>
-
                     </div>
                   </div>
                 </div>
@@ -157,8 +157,7 @@ function UserListTable() {
                         <label
                           htmlFor="hs-at-with-checkboxes-main"
                           className="flex"
-                        >
-                        </label>
+                        ></label>
                       </th>
 
                       <th
@@ -224,8 +223,7 @@ function UserListTable() {
                             <label
                               for="hs-at-with-checkboxes-1"
                               className="flex"
-                            >
-                            </label>
+                            ></label>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
@@ -253,9 +251,9 @@ function UserListTable() {
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
                           <div className="px-6 py-3">
-                              <span className="text-xs text-gray-500">
-                               {user.location}
-                              </span>
+                            <span className="text-xs text-gray-500">
+                              {user.location}
+                            </span>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
@@ -279,7 +277,6 @@ function UserListTable() {
                             </span>
                           </div>
                         </td>
-                        
                       </tr>
                     ))}
                   </tbody>
@@ -345,8 +342,7 @@ function UserListTable() {
             </div>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

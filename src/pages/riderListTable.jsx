@@ -19,61 +19,57 @@ function RiderListTable() {
   // This updatename is purely for call the useEffect when status of the rider is updated
   const [updatedName, setUpdatedName] = useState("");
 
-
   // Formated the date and time
   const convertTime = (created_time) => {
     if (!created_time || !created_time._seconds || !created_time._nanoseconds) {
       return "Invalid timestamp";
-  }
-  
-  const firebaseTimestamp = created_time;
-  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
-  return date.toLocaleString();
+    }
+
+    const firebaseTimestamp = created_time;
+    const date = new Date(
+      firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6
+    );
+    return date.toLocaleString();
   };
-  
+
   const [riders, setRiders] = useState([]);
-  
-    const getusers = async () => {
-      try {
-        const responce = await axios.get("http://localhost:4000/api/riders");
-        setRiders(responce.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getusers();
-    console.log(riders);
-   
 
-
-
-  function approve(id){
+  const getusers = async () => {
     try {
-      axios.post(
-        "http://localhost:4000/api/update-status",
-        { id }
+      const responce = await axios.get(
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/riders`
       );
-      
-      setRiders(riders.filter((rider)=>{return rider.id!=id;}));
-      console.log(responce.status);
-      if(responce.status == "")
-      setUpdatedName("Updated");
-      
+      setRiders(responce.data);
     } catch (e) {
       console.log(e);
     }
   };
+  getusers();
+  console.log(riders);
+
+  function approve(id) {
+    try {
+      axios.post("http://localhost:4000/api/update-status", { id });
+
+      setRiders(
+        riders.filter((rider) => {
+          return rider.id != id;
+        })
+      );
+      console.log(responce.status);
+      if (responce.status == "") setUpdatedName("Updated");
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const displayDetails = async (id) => {
     try {
-      navigate("/riderDetails",{state:{uid:id}})
-      
+      navigate("/riderDetails", { state: { uid: id } });
     } catch (e) {
       console.log(e);
     }
   };
-
-  
 
   // Show status
   function returnStatus(sts) {
@@ -95,7 +91,7 @@ function RiderListTable() {
           </span>
         </div>
       );
-    } else if ((sts == null)||(sts ===false )) {
+    } else if (sts == null || sts === false) {
       return (
         <div className=" py-3">
           <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-500/10 dark:text-yellow-500">
@@ -159,7 +155,6 @@ function RiderListTable() {
                       >
                         View all
                       </a>
-
                     </div>
                   </div>
                 </div>
@@ -171,8 +166,7 @@ function RiderListTable() {
                         <label
                           htmlFor="hs-at-with-checkboxes-main"
                           className="flex"
-                        >
-                        </label>
+                        ></label>
                       </th>
 
                       <th
@@ -230,8 +224,7 @@ function RiderListTable() {
                             <label
                               for="hs-at-with-checkboxes-1"
                               className="flex"
-                            >
-                            </label>
+                            ></label>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
@@ -285,18 +278,23 @@ function RiderListTable() {
                         <td className="h-px w-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
                             <button
-                              onClick={() => {const setId =rider.uid; approve(setId);}}
-                            autoFocus
-                            style={{ color: 'blue', fontSize: '14px' }}>
+                              onClick={() => {
+                                const setId = rider.uid;
+                                approve(setId);
+                              }}
+                              autoFocus
+                              style={{ color: "blue", fontSize: "14px" }}
+                            >
                               Change Status
                             </button>
                           </div>
                         </td>
                         <td className="h-px w-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
-                            <button   
+                            <button
                               onClick={() => displayDetails(rider.uid)}
-                              style={{ color: 'blue', fontSize: '14px' }}>
+                              style={{ color: "blue", fontSize: "14px" }}
+                            >
                               More Details
                             </button>
                           </div>
@@ -366,8 +364,7 @@ function RiderListTable() {
             </div>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

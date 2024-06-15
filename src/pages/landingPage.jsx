@@ -10,7 +10,7 @@ function LandingPage() {
 
   function handleSubmit() {
     axios
-      .post("http://localhost:4000/api/auth", {
+      .post(`${import.meta.env.VITE_PRODUCTION_URL}/api/auth`, {
         email: email,
         password: password,
       })
@@ -39,11 +39,10 @@ function LandingPage() {
 
               <div className="mt-4 md:mb-12 max-w-2xl">
                 <h1 className="mb-4 font-semibold text-gray-800 text-4xl lg:text-5xl dark:text-gray-800">
-                    See overall summary. Approve or delete users and service providers. Handle Payments and Journeys.
+                  See overall summary. Approve or delete users and service
+                  providers. Handle Payments and Journeys.
                 </h1>
-                <p className="text-red-600 dark:text-gray-400">
-                  Admin 
-                </p>
+                <p className="text-red-600 dark:text-gray-400">Admin</p>
               </div>
 
               <blockquote className="hidden md:block relative max-w-sm">
@@ -84,8 +83,8 @@ function LandingPage() {
                       </div>
                       <div className="text-xs text-gray-500">
                         Director | Vojo Tourism
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </footer>
               </blockquote>
@@ -195,8 +194,6 @@ function LandingPage() {
             </span>
             individuals and companies trust Vojo
           </div>
-
-          
         </div>
       </div>
     </>

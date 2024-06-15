@@ -4,32 +4,33 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { navigateToPage } from "../navigations/navigations";
 
-
 function UpcomingTrips() {
   // This updatename is purely for call the useEffect when status of the hotel is updated
   const [updatedName, setUpdatedName] = useState("");
-
-  
 
   const [trips, setTrips] = useState([]);
   const [user, setUser] = useState();
   useEffect(() => {
     const getTrips = async () => {
       try {
-        const responce = await axios.get("http://localhost:4000/api/upcoming_trips");
+        const responce = await axios.get(
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/upcoming_trips`
+        );
         setTrips(responce.data);
       } catch (e) {
         console.log(e);
       }
     };
-    
+
     getTrips();
     console.log(trips);
   }, [updatedName]);
 
   const getUser = async (userId) => {
     try {
-      const responce = await axios.get(`http://localhost:4000/api/users/${userId}`);
+      const responce = await axios.get(
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/users/${userId}`
+      );
       return responce.data.display_name;
     } catch (e) {
       console.log(e);
@@ -120,7 +121,6 @@ function UpcomingTrips() {
                       >
                         View all
                       </a>
-                      
                     </div>
                   </div>
                 </div>
@@ -128,12 +128,11 @@ function UpcomingTrips() {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-100">
                   <thead className="bg-gray-50 dark:bg-slate-300">
                     <tr>
-                    <th scope="col" className="ps-6 py-3 text-start">
+                      <th scope="col" className="ps-6 py-3 text-start">
                         <label
                           htmlFor="hs-at-with-checkboxes-main"
                           className="flex"
-                        >
-                        </label>
+                        ></label>
                       </th>
 
                       <th
@@ -224,94 +223,93 @@ function UpcomingTrips() {
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                     {trips.map((trip) => (
                       <tr>
-                      <td className="h-px w-px whitespace-nowrap">
-                        <div className="ps-6 py-3">
-                          <label
-                            for="hs-at-with-checkboxes-1"
-                            className="flex"
-                          > 
-                          </label>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.user_id}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.trip_type}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.start_date}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.end_date}
-                          </span>
-                        </div>
-                      </td>
-                      
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.start_location}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.intermediate_location}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.end_location}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.travelling_Mode}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.distance}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.duration}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="h-px w-72 whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
-                            {trip.cost}
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
+                        <td className="h-px w-px whitespace-nowrap">
+                          <div className="ps-6 py-3">
+                            <label
+                              for="hs-at-with-checkboxes-1"
+                              className="flex"
+                            ></label>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.user_id}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.trip_type}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.start_date}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.end_date}
+                            </span>
+                          </div>
+                        </td>
+
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.start_location}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.intermediate_location}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.end_location}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.travelling_Mode}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.distance}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.duration}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="h-px w-72 whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <span className="block text-sm font-semibold text-gray-800 dark:text-gray-800">
+                              {trip.cost}
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
@@ -325,15 +323,12 @@ function UpcomingTrips() {
                       Upcoming Trips
                     </p>
                   </div>
-
-                  
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

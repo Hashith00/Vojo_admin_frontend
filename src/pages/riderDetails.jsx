@@ -1,20 +1,19 @@
 import React from "react";
-import { useLocation,useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios'
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function RiderDetails() {
-  
-  const Locate=useLocation();
-  
-  const DETAIL_ID=Locate.state.uid;
+  const Locate = useLocation();
+
+  const DETAIL_ID = Locate.state.uid;
 
   const [updatedName, setUpdatedName] = useState("");
 
   const [name, setname] = useState("");
-  const [drivinglicencenumber,setDrivinglicencenumber] =useState("");
+  const [drivinglicencenumber, setDrivinglicencenumber] = useState("");
   const [email, setEmail] = useState("");
-  const [languages,setLanguages] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const [location, setLocation] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [photo, setPhoto] = useState("");
@@ -22,23 +21,26 @@ function RiderDetails() {
   const [joinedTime, setJoinedTime] = useState("");
 
   const [brand, setBrand] = useState("");
-  const [category,setCategory] =useState("");
+  const [category, setCategory] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [color,setColor] = useState("");
+  const [color, setColor] = useState("");
   const [fuelType, setFuelType] = useState("");
   const [gearType, setGearType] = useState("");
   const [vehiclePhoto, setvehiclePhoto] = useState("");
   const [model, setModel] = useState("");
   const [noPassengers, setNoPassengers] = useState("");
 
-  
-  const URL=`http://localhost:4000/api/serviceUsers/${DETAIL_ID}`;
-  const vehicleURL=`http://localhost:4000/api/vehicles/${DETAIL_ID}`;
+  const URL = `${
+    import.meta.env.VITE_PRODUCTION_URL
+  }/api/serviceUsers/${DETAIL_ID}`;
+  const vehicleURL = `${
+    import.meta.env.VITE_PRODUCTION_URL
+  }/api/vehicles/${DETAIL_ID}`;
   useEffect(() => {
     const getServiceUser = async (uid) => {
       try {
-        const responce = await axios.get(URL)
-        .then((response)=>{setname(response.data.display_name);
+        const responce = await axios.get(URL).then((response) => {
+          setname(response.data.display_name);
           setDrivinglicencenumber(response.data.driving_licence_number);
           setEmail(response.data.email);
           setLanguages(response.data.languages);
@@ -49,17 +51,15 @@ function RiderDetails() {
           setVehicleNo(response.data.vehicle_number);
           setDrivinglicencenumber(response.data.vehicle_number);
           setJoinedTime(response.data.created_time);
-        })
-          
-        } catch (e) {
+        });
+      } catch (e) {
         console.log(e);
       }
     };
     getServiceUser();
     const getVehicleDetials = async (uid) => {
       try {
-        const responce = await axios.get(vehicleURL)
-        .then((response)=>{
+        const responce = await axios.get(vehicleURL).then((response) => {
           setCapacity(response.data.capaity);
           setCategory(response.data.categoty);
           setColor(response.data.color);
@@ -68,25 +68,24 @@ function RiderDetails() {
           setvehiclePhoto(response.data.imageurl);
           setNoPassengers(response.data.max_passenger);
           setModel(response.data.model);
-        })
-          
-        } catch (e) {
+        });
+      } catch (e) {
         console.log(e);
       }
     };
     getVehicleDetials();
-    
   }, [updatedName]);
-  
 
   const convertTime = (joinedTime) => {
     if (!joinedTime || !joinedTime._seconds || !joinedTime._nanoseconds) {
       return "Invalid timestamp";
-  }
-  
-  const firebaseTimestamp =joinedTime;
-  const date = new Date(firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6);
-  return date.toLocaleString();
+    }
+
+    const firebaseTimestamp = joinedTime;
+    const date = new Date(
+      firebaseTimestamp._seconds * 1000 + firebaseTimestamp._nanoseconds / 1e6
+    );
+    return date.toLocaleString();
   };
 
   return (
@@ -97,13 +96,13 @@ function RiderDetails() {
           class="w-full h-full rounded-tl-lg rounded-tr-lg"
         />
       </div>
-      
+
       <div class="flex flex-col items-center -mt-20">
-        
-          <img
+        <img
           src={photo}
           class="w-40 border-4 border-white rounded-full"
-        width="10%"/>
+          width="10%"
+        />
         <div className="flex items-center space-x-2 mt-2">
           <p className="text-2xl">{name}</p>
           <span className="bg-blue-500 rounded-full p-1" title="Verified">
@@ -124,9 +123,8 @@ function RiderDetails() {
           </span>
         </div>
         <p className="text-sm text-gray-500"></p>
-        
       </div>
-      
+
       <div className="my-4 ">
         <div class="w-full flex flex-col 2xl:w-1/3">
           <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
@@ -154,7 +152,10 @@ function RiderDetails() {
               </li>
               <li class="flex border-b py-2">
                 <span class="font-bold w-24">Languages :</span>
-                <span class="text-gray-700">{languages[0]} {languages[1]} {languages[2]} {languages[3]} {languages[4]}</span>
+                <span class="text-gray-700">
+                  {languages[0]} {languages[1]} {languages[2]} {languages[3]}{" "}
+                  {languages[4]}
+                </span>
               </li>
               <li class="flex items-center border-b py-2 space-x-2">
                 <span class="font-bold w-24">Vehicle No :</span>
@@ -167,9 +168,9 @@ function RiderDetails() {
             </ul>
           </div>
         </div>
-        
       </div>
-      <br/><br/>
+      <br />
+      <br />
       <div className="my-4 ">
         <div class="w-full flex flex-col 2xl:w-1/3">
           <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
@@ -205,16 +206,17 @@ function RiderDetails() {
               </li>
               <li>
                 <span class="font-bold w-24">Model :</span>
-                <span class="text-gray-700"><img
-                  src={vehiclePhoto}
-                  class="w-40 border-4 border-white "
-                  width="30%"/></span>
-                
+                <span class="text-gray-700">
+                  <img
+                    src={vehiclePhoto}
+                    class="w-40 border-4 border-white "
+                    width="30%"
+                  />
+                </span>
               </li>
             </ul>
           </div>
         </div>
-        
       </div>
     </>
   );
