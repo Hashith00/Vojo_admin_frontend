@@ -27,7 +27,7 @@ const Statistics = () => {
     const fetchHotelCount = async () => {
       try {
         const response2 = await axios.get(
-          "http://localhost:4000/api/hotel/count"
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/hotel/count`
         );
         const { val } = response2.data;
         setHotelCount(val);
@@ -42,7 +42,7 @@ const Statistics = () => {
     const fetchUsersCount = async () => {
       try {
         const response3 = await axios.get(
-          "http://localhost:4000/api/user/count"
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/user/count`
         );
         const { val } = response3.data; // Extract the val from the response
         setUsersCount(val);
